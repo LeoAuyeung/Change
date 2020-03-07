@@ -171,7 +171,7 @@ class Welcome extends Component {
         pagingEnabled
         scrollEnabled
         showsHorizontalScrollIndicator={false}
-        scrollEventThrottle={16}
+        scrollEventThrottle={126}
         snapToAlignment="center"
         data={illustrations}
         extraDate={this.state}
@@ -179,8 +179,17 @@ class Welcome extends Component {
         renderItem={({ item }) => (
           <Image
             source={item.source}
-            resizeMode="contain"
-            style={{ width, height: height / 2, overflow: "visible" }}
+            // resizeMode="contain"
+            style={{
+              // overflow: "visible",
+              width: width / 1.5, height: height / 3.25,
+              // width: width / 2, height: height / 4,
+              borderRadius: 360,
+              borderWidth: 3,
+              borderColor: "white",
+              margin: width / 6
+              // margin: width /4 
+            }}
           />
         )}
         onScroll={Animated.event([
@@ -225,15 +234,19 @@ class Welcome extends Component {
       <Block>
         <Block center bottom flex={0.4}>
           <Text h1 center bold>
-            Your Home.
+            Make a difference,
+          </Text>
+          <Text h1 center bold>
+            a little 
             <Text h1 primary>
               {" "}
-              Greener.
+              Change 
             </Text>
+            &nbsp;at a time.
           </Text>
-          <Text h3 gray2 style={{ marginTop: theme.sizes.padding / 2 }}>
+          {/* <Text h3 gray2 style={{ marginTop: theme.sizes.padding / 2 }}>
             Enjoy the experience.
-          </Text>
+          </Text> */}
         </Block>
         <Block center middle>
           {this.renderIllustrations()}
@@ -264,9 +277,9 @@ class Welcome extends Component {
 
 Welcome.defaultProps = {
   illustrations: [
-    { id: 1, source: require("../assets/images/illustration_1.png") },
-    { id: 2, source: require("../assets/images/illustration_2.png") },
-    { id: 3, source: require("../assets/images/illustration_3.png") }
+    { id: 1, source: require("../assets/images/donate_1.png") },
+    { id: 2, source: require("../assets/images/donate_2.png") },
+    { id: 3, source: require("../assets/images/donate_3.png") }
   ]
 };
 
