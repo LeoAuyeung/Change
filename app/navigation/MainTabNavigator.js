@@ -8,6 +8,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import Welcome from "../screens/Welcome";
 import Login from "../screens/Login";
 import SignUp from "../screens/SignUp";
+import Dashboard from "../screens/Dashboard";
 import Forgot from "../screens/Forgot";
 import Explore from "../screens/Explore";
 import Browse from "../screens/Browse";
@@ -16,7 +17,7 @@ import Settings from "../screens/Settings";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
-  default: {}
+  default: {},
 });
 
 const MainStack = createStackNavigator(
@@ -26,9 +27,10 @@ const MainStack = createStackNavigator(
     SignUp,
     Forgot,
     Explore,
+    Dashboard,
     Browse,
     Product,
-    Settings
+    Settings,
   },
   config
 );
@@ -68,7 +70,7 @@ MainStack.path = "";
 
 const CharityStack = createStackNavigator(
   {
-    Explore
+    Explore,
   },
   config
 );
@@ -84,14 +86,14 @@ CharityStack.navigationOptions = {
           : "md-information-circle"
       }
     />
-  )
+  ),
 };
 
 CharityStack.path = "";
 
 const NewsStack = createStackNavigator(
   {
-    Settings
+    Settings,
   },
   config
 );
@@ -107,7 +109,7 @@ NewsStack.navigationOptions = {
           : "md-information-circle"
       }
     />
-  )
+  ),
 };
 
 NewsStack.path = "";
@@ -115,7 +117,7 @@ NewsStack.path = "";
 const tabNavigator = createBottomTabNavigator({
   MainStack,
   CharityStack,
-  NewsStack
+  NewsStack,
 });
 
 tabNavigator.path = "";
