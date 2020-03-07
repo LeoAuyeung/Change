@@ -92,7 +92,7 @@ export default class Dashboard extends Component {
           </Block>
         </Block>
       </Card>
-</TouchableOpacity>
+    </TouchableOpacity>
     );
   }
 
@@ -185,33 +185,35 @@ export default class Dashboard extends Component {
 
   renderCC() {
     return (
-      <Block horizontal>
-        <LinearGradient
-          end={{ x: 1, y: 0 }}
-          style={[blockStyles.row, cardStyles.card, styles.awards]}
-          colors={["#2BDA8E", "#41cc66"]}
-        >
-          <Block middle flex={0.4}>
-            <Badge color={rgba(theme.colors.white, "0.2")} size={74}>
-              <Badge color={rgba(theme.colors.white, "0.2")} size={52}>
-                <Icon.FontAwesome
-                  name="google-wallet"
-                  color="white"
-                  size={30}
-                />
+      <TouchableOpacity onPress={() => this.setState({ showCC: true })}>
+        <Block horizontal>
+          <LinearGradient
+            end={{ x: 1, y: 0 }}
+            style={[blockStyles.row, cardStyles.card, styles.awards]}
+            colors={["#2BDA8E", "#41cc66"]}
+          >
+            <Block middle flex={0.4}>
+              <Badge color={rgba(theme.colors.white, "0.2")} size={74}>
+                <Badge color={rgba(theme.colors.white, "0.2")} size={52}>
+                  <Icon.FontAwesome
+                    name="google-wallet"
+                    color="white"
+                    size={30}
+                  />
+                </Badge>
               </Badge>
-            </Badge>
-          </Block>
-          <Block middle>
-            <Text size={theme.sizes.base} spacing={0.4} medium white>
-              Credit Card ending in
-            </Text>
-            <Text size={20} spacing={0.4} bold white>
-              8864
-            </Text>
-          </Block>
-        </LinearGradient>
-      </Block>
+            </Block>
+            <Block middle>
+              <Text size={theme.sizes.base} spacing={0.4} medium white>
+                Credit Card ending in
+              </Text>
+              <Text size={20} spacing={0.4} bold white>
+                8864
+              </Text>
+            </Block>
+          </LinearGradient>
+        </Block>
+      </TouchableOpacity>
     );
   }
 
