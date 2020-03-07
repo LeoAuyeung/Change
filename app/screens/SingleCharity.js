@@ -54,7 +54,6 @@ class SingleCharity extends Component {
 				</View>
 				<View style={[styles.flex, styles.content]}>
 					<View style={[styles.flex, styles.contentHeader]}>
-						<Image style={[styles.avatar, styles.shadow]} source={require("../assets/images/avatar.png")} />
 						<Text style={styles.title}>{charity.charityName}</Text>
 						<View>
 							<Text style={styles.description}>
