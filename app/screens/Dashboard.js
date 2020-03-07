@@ -8,7 +8,8 @@ import {
   StyleSheet,
   Image,
 } from "react-native";
-import { Card, Button, Block, Text } from "../components";
+import rgba from "hex-to-rgba";
+import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
 
 export default class Dashboard extends Component {
@@ -100,6 +101,7 @@ export default class Dashboard extends Component {
 
     const transactions = [
       {
+        id: 1,
         name: "Trader Joes Coffee",
         change: 0.36,
       },
@@ -123,9 +125,16 @@ export default class Dashboard extends Component {
         </View>
         {this.renderDollarCard()}
         <Card shadow>
-          <TouchableOpacity onPress={() => this.setState({ showCC: true })}>
-            <Text> Hello </Text>
-          </TouchableOpacity>
+          <Block>
+            <Block center>
+              <Text h2 bold>
+                Credit Card ending in <Text primary> 8231</Text>
+              </Text>
+            </Block>
+            <TouchableOpacity onPress={() => this.setState({ showCC: true })}>
+              <Text> Add Credit Card </Text>
+            </TouchableOpacity>
+          </Block>
         </Card>
         <Block top>
           <Text style={[styles.header, { paddingLeft: 16 }]}>
@@ -137,9 +146,77 @@ export default class Dashboard extends Component {
             </Block>
           </Card>
         </Block>
-        {transactions.map(t => {
-          return <Text>{t.name}</Text>;
-        })}
+        <Block
+          style={{ marginBottom: 5, paddingHorizontal: theme.sizes.padding }}
+        >
+          <Text spacing={0.4} transform="uppercase">
+            Recent Transactions
+          </Text>
+          <ScrollView>
+            <Block style={{ paddingHorizontal: 10 }}>
+              {transactions.map(t => {
+                return (
+                  <Card shadow key={`transaction-${t.id}`}>
+                    <Block
+                      row
+                      space="between"
+                      style={{ marginBottom: theme.sizes.base }}
+                    >
+                      <Block
+                        row
+                        space="between"
+                        style={{ marginBottom: theme.sizes.base }}
+                      >
+                        <Text spacing={0.5} caption>
+                          {t.name}
+                        </Text>
+                        <Text spacing={0.5} caption medium primary>
+                          hello
+                        </Text>
+                        <Text spacing={0.5} caption>
+                          123
+                        </Text>
+                      </Block>
+                      <Block row center>
+                        <Badge
+                          color={rgba(theme.colors.accent, "0.2")}
+                          size={14}
+                          style={{ marginRight: 8 }}
+                        >
+                          <Badge color={theme.colors.accent} size={8} />
+                        </Badge>
+                        <Text spacing={0.5} color="gray">
+                          from
+                        </Text>
+                      </Block>
+
+                      <Block row center style={{ paddingVertical: 4 }}>
+                        <Badge
+                          color="gray2"
+                          size={4}
+                          style={{ marginLeft: 4.5 }}
+                        />
+                      </Block>
+
+                      <Block row center>
+                        <Badge
+                          color={rgba(theme.colors.primary, "0.2")}
+                          size={14}
+                          style={{ marginRight: 8 }}
+                        >
+                          <Badge color={theme.colors.primary} size={8} />
+                        </Badge>
+                        <Text spacing={0.5} color="gray">
+                          to
+                        </Text>
+                      </Block>
+                    </Block>
+                  </Card>
+                );
+              })}
+            </Block>
+          </ScrollView>
+        </Block>
         {this.renderDonationMessage()}
         {this.renderAddCC()}
       </Block>
