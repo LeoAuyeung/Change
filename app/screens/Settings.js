@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Image, StyleSheet, ScrollView, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard
+} from "react-native";
 import Slider from "react-native-slider";
 
 import { Divider, Button, Block, Text, Switch } from "../components";
@@ -9,7 +16,7 @@ const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     {children}
   </TouchableWithoutFeedback>
-)
+);
 
 class Settings extends Component {
   state = {
