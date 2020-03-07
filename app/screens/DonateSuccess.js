@@ -4,10 +4,13 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
+  View
 } from "react-native";
 
 import { Button, Block, Input, Text } from "../components";
 import { theme } from "../constants";
+import LottieView from "lottie-react-native";
+// import from "../assets/lottie/checkAnimation.json";
 
 export default class DonateSuccess extends Component {
   state = {
@@ -15,6 +18,18 @@ export default class DonateSuccess extends Component {
     loading: false,
     value: "0",
   };
+
+  componentDidMount() {
+    this.animation.play();
+    // Or set a specific startFrame and endFrame with:
+    // this.animation.play(30, 120);
+  }
+
+  resetAnimation = () => {
+    this.animation.reset();
+    // this.animation.play();
+  };
+
 
   handleReturn() {
     const { navigation } = this.props;
@@ -40,10 +55,34 @@ export default class DonateSuccess extends Component {
 
     return (
       <KeyboardAvoidingView style={styles.login} behavior="padding">
-        <Block padding={[0, theme.sizes.base * 2]}>
-          <Text h1 bold>
+        <Block padding={[0, theme.sizes.base * 2], 50}>
+          <Text h1 bold center>
             Success!
           </Text>
+          <View style={styles.animationContainer}>
+            <LottieView
+            ref={animation => {
+                this.animation = animation;
+            }}
+            style={{
+                width: 300,
+                height: 300,
+                backgroundColor: '#fff',
+            }}
+            source={require('../assets/lottie/checkAnimation.json')}
+            loop={false}
+            // OR find more Lottie files @ https://lottiefiles.com/featured
+            // Just click the one you like, place that file in the 'assets' folder to the left, and replace the above 'require' statement
+            />
+            </View>
+            <Text h1 bold center
+                style={{
+                    marginTop: 50,
+                    marginBottom: 10
+                }} 
+            >
+                You just donated $50.00 to the American Red Cross!
+            </Text>
           <Block middle>
             <Button gradient onPress={() => this.handleReturn()}>
               {loading ? (
@@ -74,5 +113,10 @@ const styles = StyleSheet.create({
   },
   hasErrors: {
     borderBottomColor: theme.colors.accent
+  },
+  animationContainer: {
+      width: '100%',
+      height: '50%',
+      alignItems: 'center',
   }
 });
