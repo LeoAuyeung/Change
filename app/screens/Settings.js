@@ -14,7 +14,7 @@ const DismissKeyboard = ({ children }) => (
 class Settings extends Component {
   state = {
     budget: 50,
-    monthly: 2500,
+    monthly: 50,
     notifications: true,
     newsletter: false,
     editing: null,
@@ -137,8 +137,9 @@ class Settings extends Component {
                 Monthly Donation Cap
               </Text>
               <Slider
-                minimumValue={0}
-                maximumValue={5000}
+                minimumValue={5}
+                maximumValue={100}
+                step={5}
                 style={{ height: 19 }}
                 thumbStyle={styles.thumb}
                 trackStyle={{ height: 6, borderRadius: 6 }}
