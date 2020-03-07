@@ -10,7 +10,7 @@ import {
   Modal,
   TouchableOpacity,
   StyleSheet,
-  Image,
+  Image
 } from "react-native";
 import rgba from "hex-to-rgba";
 import { styles as blockStyles } from "../components/Block";
@@ -19,12 +19,13 @@ import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
 
 const { width } = Dimensions.get("window");
+
 export default class Dashboard extends Component {
   state = {
     showModal: false,
     showCC: false,
     showTransaction: false,
-    showDonationOverview: false,
+    showDonationOverview: false
   };
 
   componentDidMount() {
@@ -37,62 +38,62 @@ export default class Dashboard extends Component {
         activeOpacity={0.8}
         onPress={() => navigation.navigate("Settings")}
       >
-      <Card shadow style={{ padding: 20 }}>
-        <Image
-          resizeMode="contain"
-          source={require("../assets/images/More.png")}
-          style={styles.moreIcon}
-        />
-        <Block>
-          <Block center>
-            <Text h1 primary>
-              {" "}
-              $11.71{" "}
-            </Text>
-            <Text spacing={0.71}> Total Donation Amount</Text>
-          </Block>
-
-          <Block color="gray2" style={styles.hLine} />
-          <Block row>
+        <Card shadow style={{ padding: 20 }}>
+          <Image
+            resizeMode="contain"
+            source={require("../assets/images/More.png")}
+            style={styles.moreIcon}
+          />
+          <Block>
             <Block center>
-              <Text
-                size={20}
-                spacing={0.6}
-                primary
-                style={{ marginBottom: 6 }}
-              >
-                5
+              <Text h1 primary>
+                {" "}
+                $11.71{" "}
               </Text>
-              <Text body spacing={0.7}>
-                African 
-              </Text>
-              <Text body spacing={0.7}>
-                Children Saved
-              </Text>
+              <Text spacing={0.71}> Total Donation Amount</Text>
             </Block>
 
-            <Block flex={false} color="gray2" style={styles.vLine} />
+            <Block color="gray2" style={styles.hLine} />
+            <Block row>
+              <Block center>
+                <Text
+                  size={20}
+                  spacing={0.6}
+                  primary
+                  style={{ marginBottom: 6 }}
+                >
+                  5
+                </Text>
+                <Text body spacing={0.7}>
+                  African
+                </Text>
+                <Text body spacing={0.7}>
+                  Children Saved
+                </Text>
+              </Block>
 
-            <Block center>
-              <Text
-                size={20}
-                spacing={0.6}
-                primary
-                style={{ marginBottom: 6 }}
-              >
-                #1872
-              </Text>
-              <Text body spacing={0.7}>
-                Donation
-              </Text>
-              <Text body spacing={0.7}>
-                Ranking
-              </Text>
+              <Block flex={false} color="gray2" style={styles.vLine} />
+
+              <Block center>
+                <Text
+                  size={20}
+                  spacing={0.6}
+                  primary
+                  style={{ marginBottom: 6 }}
+                >
+                  #1872
+                </Text>
+                <Text body spacing={0.7}>
+                  Donation
+                </Text>
+                <Text body spacing={0.7}>
+                  Ranking
+                </Text>
+              </Block>
             </Block>
           </Block>
-        </Block>
-      </Card>
-</TouchableOpacity>
+        </Card>
+      </TouchableOpacity>
     );
   }
 
@@ -156,8 +157,7 @@ export default class Dashboard extends Component {
 
   renderCharities = charity => {
     return (
-      <TouchableOpacity activeOpacity={0.8} onPress={() => {
-      }}>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
         <Card shadow style={styles.charityStatus}>
           <Image
             source={charity.icon}
@@ -180,8 +180,8 @@ export default class Dashboard extends Component {
           </Text>
         </Card>
       </TouchableOpacity>
-    )
-  }
+    );
+  };
 
   renderCC() {
     return (
@@ -242,28 +242,28 @@ export default class Dashboard extends Component {
         newTotal: "10.80",
         price: 0.69,
         transactionPrice: "3.00"
-      },
+      }
     ];
 
     const myCharities = [
       {
         id: 1,
         name: "Team Trees",
-        icon: require('../assets/images/teamtrees.jpg'),
+        icon: require("../assets/images/teamtrees.jpg"),
         description: "Championed by Mr B..."
       },
       {
         id: 2,
         name: "Direct Relief",
-        icon: require('../assets/images/corona.png'),
+        icon: require("../assets/images/corona.png"),
         description: "Corona Virus ef..."
       },
       {
         id: 3,
         name: "Red Cross",
-        icon: require('../assets/images/redcross.jpg'),
+        icon: require("../assets/images/redcross.jpg"),
         description: "Hospitals around the worl..."
-      },
+      }
     ];
 
     return (
@@ -271,31 +271,32 @@ export default class Dashboard extends Component {
         <View style={styles.view}>
           <View>
             <Text style={{ color: theme.colors.caption }}>Welcome Back,</Text>
-            <Text style={{ fontSize: theme.sizes.font * 2 }}>Tony</Text>
+            <Text style={{ fontSize: theme.sizes.font * 2 }}>Miguel</Text>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
-            <Image
-              style={styles.avatar}
-              source={{
-                uri: "https://randomuser.me/api/portraits/women/32.jpg",
-              }}
-            />
+            <Image style={styles.avatar} source={profile.avatar} />
           </TouchableOpacity>
         </View>
-        <Block horizontal>
-          {this.renderDollarCard(navigation)}
-        </Block>
+        <Block horizontal>{this.renderDollarCard(navigation)}</Block>
         {this.renderCC()}
-        <Block top style={{ paddingHorizontal: theme.sizes.padding}}>
-          <View style={{ flex:1, flexDirection: "row", justifyContent: "space-between"}}>
-            <Text spacing={0.7} transform="uppercase" style={{ marginTop: 10  }}>
+        <Block top style={{ paddingHorizontal: theme.sizes.padding }}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-between"
+            }}
+          >
+            <Text spacing={0.7} transform="uppercase" style={{ marginTop: 10 }}>
               Your Charities
             </Text>
             <TouchableOpacity onPress={() => navigation.navigate("Browse")}>
-              <Text style={{fontSize: 30, marginBottom: 5, marginRight: 5}}>+</Text>
+              <Text style={{ fontSize: 30, marginBottom: 5, marginRight: 5 }}>
+                +
+              </Text>
             </TouchableOpacity>
           </View>
-            <Block>
+          <Block>
             <FlatList
               horizontal
               pagingEnabled
@@ -317,13 +318,11 @@ export default class Dashboard extends Component {
             Recent Transactions
           </Text>
           <Block>
-            <Block style={{paddingTop: 10}}>
+            <Block style={{ paddingTop: 10 }}>
               {transactions.map(t => {
                 return (
                   <Card shadow key={`transaction-${t.id}`}>
-                    <Block
-                      style={{ marginBottom: theme.sizes.base }}
-                    >
+                    <Block style={{ marginBottom: theme.sizes.base }}>
                       <Block
                         row
                         space="between"
@@ -346,7 +345,7 @@ export default class Dashboard extends Component {
                           <Text> Change</Text>
                         </Block>
                         <Block row space="between">
-                          <Block style={{ marginRight: 170}} row center>
+                          <Block style={{ marginRight: 170 }} row center>
                             <Badge
                               color={rgba(theme.colors.accent, "0.2")}
                               size={14}
@@ -354,7 +353,11 @@ export default class Dashboard extends Component {
                             >
                               <Badge color={theme.colors.accent} size={8} />
                             </Badge>
-                            <Text style={{fontSize:20}} spacing={0.5} color="gray">
+                            <Text
+                              style={{ fontSize: 20 }}
+                              spacing={0.5}
+                              color="gray"
+                            >
                               ${t.transactionPrice}
                             </Text>
                           </Block>
@@ -366,7 +369,11 @@ export default class Dashboard extends Component {
                             >
                               <Badge color={theme.colors.primary} size={8} />
                             </Badge>
-                            <Text style={{fontSize:20}} spacing={0.5} color="gray">
+                            <Text
+                              style={{ fontSize: 20 }}
+                              spacing={0.5}
+                              color="gray"
+                            >
                               ${t.price}
                             </Text>
                           </Block>
@@ -376,11 +383,11 @@ export default class Dashboard extends Component {
                   </Card>
                 );
               })}
-                <Button gradient>
-                  <Text white center>
-                    See More
-                  </Text>
-                </Button>
+              <Button gradient>
+                <Text white center>
+                  See More
+                </Text>
+              </Button>
             </Block>
           </Block>
         </ScrollView>
@@ -392,7 +399,7 @@ export default class Dashboard extends Component {
 }
 
 Dashboard.defaultProps = {
-  profile: mocks.profile,
+  profile: mocks.profile
 };
 
 const styles = StyleSheet.create({
@@ -408,12 +415,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.sizes.padding,
     paddingTop: theme.sizes.padding * 1.33,
     paddingBottom: theme.sizes.padding * 0.66,
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   avatar: {
     height: theme.sizes.base * 3,
     width: theme.sizes.base * 3,
-    borderRadius: theme.sizes.padding,
+    borderRadius: theme.sizes.padding
   },
   charityIcon: {
     height: 50,
@@ -426,7 +433,7 @@ const styles = StyleSheet.create({
   },
   hLine: {
     marginVertical: theme.sizes.base,
-    marginHorizontal: theme.sizes.base * .5,
+    marginHorizontal: theme.sizes.base * 0.5,
     height: 1
   },
   moreIcon: {
@@ -435,6 +442,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: theme.sizes.base,
     top: theme.sizes.base
-  },
-
+  }
 });
