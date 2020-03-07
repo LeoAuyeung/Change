@@ -13,6 +13,7 @@ import Explore from "../screens/Explore";
 import Browse from "../screens/Browse";
 import Product from "../screens/Product";
 import Settings from "../screens/Settings";
+import Donate from "../screens/Donate";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
@@ -28,7 +29,8 @@ const MainStack = createStackNavigator(
     Explore,
     Browse,
     Product,
-    Settings
+    Settings,
+    Donate
   },
   config
 );
