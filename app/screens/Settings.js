@@ -157,36 +157,6 @@ class Settings extends Component {
               </Text>
             </Block>
           </Block>
-
-          <Divider />
-
-          <Block style={styles.toggles}>
-            <Block
-              row
-              center
-              space="between"
-              style={{ marginBottom: theme.sizes.base * 2 }}
-            >
-              <Text gray2>Notifications</Text>
-              <Switch
-                value={this.state.notifications}
-                onValueChange={value => this.setState({ notifications: value })}
-              />
-            </Block>
-
-            <Block
-              row
-              center
-              space="between"
-              style={{ marginBottom: theme.sizes.base * 2 }}
-            >
-              <Text gray2>Newsletter</Text>
-              <Switch
-                value={this.state.newsletter}
-                onValueChange={value => this.setState({ newsletter: value })}
-              />
-            </Block>
-          </Block>
         </ScrollView>
       </Block>
     );
