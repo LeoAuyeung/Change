@@ -76,17 +76,15 @@ const explore = [
 ];
 
 const profile = {
-  username: "react-ui-kit",
-  location: "Europe",
-  email: "contact@react-ui-kit.com",
-  avatar: require("../assets/images/avatar.png"),
+  username: "miguel.acero",
+  location: "United States",
+  email: "miguel.acero@google.com",
+  avatar: require("../assets/images/avatar.jpg"),
   budget: 1000,
   monthly_cap: 5000,
   notifications: true,
   newsletter: false
 };
 
-const charities = [
-  "../assets/images/explore_6.png",
-]
+const charities = ["../assets/images/explore_6.png"];
 export { categories, explore, products, profile, charities };

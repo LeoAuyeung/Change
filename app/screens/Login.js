@@ -4,20 +4,27 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 import { Button, Block, Input, Text } from "../components";
 import { theme } from "../constants";
 
-const VALID_EMAIL = "contact@react-ui-kit.com";
-const VALID_PASSWORD = "subscribe";
+const VALID_EMAIL = "miguel.acero@google.com";
+const VALID_PASSWORD = "password";
+
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+)
 
 export default class Login extends Component {
   state = {
     email: VALID_EMAIL,
     password: VALID_PASSWORD,
     errors: [],
-    loading: false,
+    loading: false
   };
 
   handleLogin() {
@@ -50,6 +57,7 @@ export default class Login extends Component {
     const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
 
     return (
+      <DismissKeyboard>
       <KeyboardAvoidingView style={styles.login} behavior="padding">
         <Block padding={[0, theme.sizes.base * 2]}>
           <Text h1 bold>
@@ -94,6 +102,7 @@ export default class Login extends Component {
           </Block>
         </Block>
       </KeyboardAvoidingView>
+      </DismissKeyboard>
     );
   }
 }
@@ -101,15 +110,15 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   login: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "center"
   },
   input: {
     borderRadius: 0,
     borderWidth: 0,
     borderBottomColor: theme.colors.gray2,
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth
   },
   hasErrors: {
-    borderBottomColor: theme.colors.accent,
-  },
+    borderBottomColor: theme.colors.accent
+  }
 });

@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import ImageResizeMode from "react-native/Libraries/Image/ImageResizeMode";
 
 import axios from "axios";
 import { Card, Title, Paragraph } from "react-native-paper";
@@ -66,7 +65,7 @@ class Charity extends Component {
   render() {
     return (
       <Block>
-        <Block flex={false} row space="around" style={styles.header}>
+        <Block flex={false} row space="around">
           <Text h1 bold>
             Charities
           </Text>
@@ -110,9 +109,6 @@ class Charity extends Component {
 export default Charity;
 
 const styles = StyleSheet.create({
-  header: {
-    paddingHorizontal: theme.sizes.base * 2
-  },
   categories: {
     justifyContent: "center",
     flexDirection: "row",
