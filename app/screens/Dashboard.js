@@ -57,6 +57,7 @@ export default class Dashboard extends Component {
         onRequestClose={() => this.setState({ showModal: false })}
       >
         <Block
+          margin={[320, 0, 0, 0]}
           padding={[theme.sizes.padding * 2, theme.sizes.padding]}
           space="between"
         >
@@ -75,7 +76,11 @@ export default class Dashboard extends Component {
             ></Text>
           </ScrollView>
 
-          <Block middle padding={[theme.sizes.base / 2, 0]}>
+          <Block
+            margin={[-1100, 0, 0, 0]}
+            middle
+            padding={[theme.sizes.base / 2, 0]}
+          >
             <Button
               gradient
               onPress={() => this.setState({ showModal: false })}
@@ -116,6 +121,7 @@ export default class Dashboard extends Component {
             />
           </TouchableOpacity>
         </View>
+        {this.renderDollarCard()}
         <Card shadow>
           <TouchableOpacity onPress={() => this.setState({ showCC: true })}>
             <Text> Hello </Text>
