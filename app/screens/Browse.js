@@ -55,10 +55,16 @@ class Browse extends Component {
 
     return (
       <Block>
+        {/* top panel */}
         <Block flex={false} row center space="between" style={styles.header}>
           <Text h1 bold>
             Browse
           </Text>
+          <Button onPress={() => navigation.navigate("Donate")}>
+            <Text>
+              Donate directly
+            </Text>
+          </Button>
           <Button onPress={() => navigation.navigate("Settings")}>
             <Image source={profile.avatar} style={styles.avatar} />
           </Button>
@@ -66,11 +72,13 @@ class Browse extends Component {
             <Image source={profile.avatar} style={styles.avatar} />
           </Button>
         </Block>
-
+          
+        {/* top navigation tabs */}
         <Block flex={false} row style={styles.tabs}>
           {tabs.map(tab => this.renderTab(tab))}
         </Block>
 
+        {/* scrollview to render all cards */}
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{ paddingVertical: theme.sizes.base * 2 }}
