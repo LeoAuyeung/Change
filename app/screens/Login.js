@@ -4,6 +4,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 import { Button, Block, Input, Text } from "../components";
@@ -11,6 +12,12 @@ import { theme } from "../constants";
 
 const VALID_EMAIL = "contact@react-ui-kit.com";
 const VALID_PASSWORD = "subscribe";
+
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+)
 
 export default class Login extends Component {
   state = {
@@ -50,6 +57,7 @@ export default class Login extends Component {
     const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
 
     return (
+      <DismissKeyboard>
       <KeyboardAvoidingView style={styles.login} behavior="padding">
         <Block padding={[0, theme.sizes.base * 2]}>
           <Text h1 bold>
@@ -94,6 +102,7 @@ export default class Login extends Component {
           </Block>
         </Block>
       </KeyboardAvoidingView>
+      </DismissKeyboard>
     );
   }
 }
