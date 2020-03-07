@@ -28,6 +28,10 @@ export default class Dashboard extends Component {
     showDonationOverview: false
   };
 
+  static navigationOptions = {
+    header: null,
+  };
+
   componentDidMount() {
     this.setState({ showModal: true });
   }
@@ -267,7 +271,7 @@ export default class Dashboard extends Component {
     ];
 
     return (
-      <ScrollView style={{ alignSelf: "stretch" }}>
+      <ScrollView style={{ alignSelf: "stretch", marginTop: 15 }}>
         <View style={styles.view}>
           <View>
             <Text style={{ color: theme.colors.caption }}>Welcome Back,</Text>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, View, Text, Image } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 
@@ -16,6 +16,10 @@ import Product from "../screens/Product";
 import Settings from "../screens/Settings";
 import Donate from "../screens/Donate";
 import DonateSuccess from "../screens/DonateSuccess";
+import Charity from "../screens/Charity";
+import SingleCharity from "../screens/SingleCharity";
+
+import { theme } from "../constants";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
@@ -36,7 +40,27 @@ const MainStack = createStackNavigator(
     Donate,
     DonateSuccess
   },
-  config
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        height: theme.sizes.base * 4,
+        backgroundColor: theme.colors.white, // or 'white
+        borderBottomColor: "transparent",
+        elevation: 0 // for android
+      },
+      headerBackImage: <Image source={require("../assets/icons/back.png")} />,
+      headerBackTitle: null,
+      headerLeftContainerStyle: {
+        alignItems: "center",
+        marginLeft: theme.sizes.base * 2,
+        paddingRight: theme.sizes.base
+      },
+      headerRightContainerStyle: {
+        alignItems: "center",
+        paddingRight: theme.sizes.base
+      }
+    }
+  }
 );
 
 MainStack.navigationOptions = ({ navigation }) => {
@@ -74,9 +98,30 @@ MainStack.path = "";
 
 const CharityStack = createStackNavigator(
   {
-    Explore,
+    Charity,
+    SingleCharity
   },
-  config
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        height: theme.sizes.base * 4,
+        backgroundColor: theme.colors.white, // or 'white
+        borderBottomColor: "transparent",
+        elevation: 0 // for android
+      },
+      headerBackImage: <Image source={require("../assets/icons/back.png")} />,
+      headerBackTitle: null,
+      headerLeftContainerStyle: {
+        alignItems: "center",
+        marginLeft: theme.sizes.base * 2,
+        paddingRight: theme.sizes.base
+      },
+      headerRightContainerStyle: {
+        alignItems: "center",
+        paddingRight: theme.sizes.base
+      }
+    }
+  }
 );
 
 CharityStack.navigationOptions = {
@@ -99,7 +144,27 @@ const NewsStack = createStackNavigator(
   {
     Settings,
   },
-  config
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        height: theme.sizes.base * 4,
+        backgroundColor: theme.colors.white, // or 'white
+        borderBottomColor: "transparent",
+        elevation: 0 // for android
+      },
+      headerBackImage: <Image source={require("../assets/icons/back.png")} />,
+      headerBackTitle: null,
+      headerLeftContainerStyle: {
+        alignItems: "center",
+        marginLeft: theme.sizes.base * 2,
+        paddingRight: theme.sizes.base
+      },
+      headerRightContainerStyle: {
+        alignItems: "center",
+        paddingRight: theme.sizes.base
+      }
+    }
+  }
 );
 
 NewsStack.navigationOptions = {
