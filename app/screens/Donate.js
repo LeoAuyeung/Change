@@ -4,11 +4,18 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
+  TouchableWithoutFeedback
 } from "react-native";
 
 import { Button, Block, Input, Text } from "../components";
 import { theme } from "../constants";
 import NumericInput from "@wwdrew/react-native-numeric-textinput";
+
+const DismissKeyboard = ({ children }) => (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {children}
+    </TouchableWithoutFeedback>
+)
 
 export default class Donate extends Component {
   state = {
@@ -41,18 +48,16 @@ export default class Donate extends Component {
     const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
 
     return (
+        <DismissKeyboard>
       <KeyboardAvoidingView style={styles.login} behavior="padding">
-        <Block padding={[0, theme.sizes.base * 2]}>
+        <Block padding={[50, theme.sizes.base * 2]}>
           <Text h1 bold>
             Donate directly
           </Text>
           <Text h3>
               Charity: American Red Cross
           </Text>
-          <Block middle>
-          <Text>
-              
-          </Text>
+          <Block marginTop={200}>
             <Text h3>Amount (USD)</Text>
             <NumericInput
                 type='currency'
@@ -75,6 +80,7 @@ export default class Donate extends Component {
           </Block>
         </Block>
       </KeyboardAvoidingView>
+      </DismissKeyboard>
     );
   }
 }
