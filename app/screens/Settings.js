@@ -121,7 +121,9 @@ class Settings extends Component {
                 onValueChange={value => this.setState({ budget: value })}
               />
               <Text caption gray right>
-                {this.state.budget === 100 ? "Dollar" : Math.round(this.state.budget) + " Cents"}
+                {this.state.budget === 100
+                  ? "Dollar"
+                  : Math.round(this.state.budget) + " Cents"}
               </Text>
             </Block>
             <Block margin={[10, 0]}>
