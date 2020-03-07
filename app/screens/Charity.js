@@ -77,7 +77,14 @@ class Charity extends Component {
         >
           {this.state.charities.length > 0 ? (
             this.state.charities.map((charity, i) => (
-              <TouchableOpacity key={i}>
+							<TouchableOpacity 
+								key={i}
+								onPress={() =>
+									this.props.navigation.navigate("SingleCharity", {
+										charity: charity,
+										charityImage: charityImages[i]
+									})}
+							>
                 <Card style={styles.categories}>
                   <View style={styles.coverContainer}>
                     <Image source={charityImages[i]} style={styles.image} />
