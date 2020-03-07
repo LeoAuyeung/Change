@@ -35,18 +35,35 @@ const MainStack = createStackNavigator(
   config
 );
 
-MainStack.navigationOptions = {
-  tabBarLabel: "Main",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
+MainStack.navigationOptions = ({ navigation }) => {
+  let routesToNotShowNavTabs = ["Welcome", "SignUp", "Login", "Forgot"];
+
+  let tabBarVisible;
+
+  if (navigation.state.routes.length > 0) {
+    navigation.state.routes.map(route => {
+      if (routesToNotShowNavTabs.includes(route.routeName)) {
+        tabBarVisible = false;
+      } else {
+        tabBarVisible = true;
       }
-    />
-  ),
+    });
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: "Main",
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={
+          Platform.OS === "ios"
+            ? `ios-information-circle${focused ? "" : "-outline"}`
+            : "md-information-circle"
+        }
+      />
+    )
+  };
 };
 
 MainStack.path = "";

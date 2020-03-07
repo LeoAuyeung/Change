@@ -121,7 +121,9 @@ class Settings extends Component {
                 onValueChange={value => this.setState({ budget: value })}
               />
               <Text caption gray right>
-                {this.state.budget === 100 ? "Dollar" : Math.round(this.state.budget) + " Cents"} 
+                {this.state.budget === 100
+                  ? "Dollar"
+                  : Math.round(this.state.budget) + " Cents"}
               </Text>
             </Block>
             <Block margin={[10, 0]}>
@@ -137,10 +139,14 @@ class Settings extends Component {
                 minimumTrackTintColor={theme.colors.secondary}
                 maximumTrackTintColor="rgba(157, 163, 180, 0.10)"
                 value={this.state.monthly}
-                onValueChange={value => this.setState({ monthly: value })}
+                onValueChange={value => {
+                  this.setState({
+                    monthly: Math.round(value * 100) / 100
+                  });
+                }}
               />
               <Text caption gray right>
-                {this.state.monthly}
+                {this.state.monthly.toFixed(2)}
               </Text>
             </Block>
           </Block>
