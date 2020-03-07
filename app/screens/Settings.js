@@ -20,13 +20,15 @@ const DismissKeyboard = ({ children }) => (
 
 class Settings extends Component {
   state = {
-    budget: 50,
+    budgetValuesIndex: 2,
     monthly: 50,
     notifications: true,
     newsletter: false,
     editing: null,
     profile: {}
   };
+
+  budgetValues = [0.05, 0.1, 0.25, 0.5, 1.0];
 
   componentDidMount() {
     this.setState({ profile: this.props.profile });
@@ -58,6 +60,23 @@ class Settings extends Component {
 
     return <Text bold>{profile[name]}</Text>;
   }
+
+  renderSlider = (optionsArray, stateKey) => {
+    return (
+      <Slider
+        minimumValue={0}
+        maximumValue={optionsArray.length - 1}
+        step={1}
+        value={this.state[stateKey]}
+        onValueChange={value => this.setState({ [stateKey]: value })}
+        style={{ height: 19 }}
+        thumbStyle={styles.thumb}
+        trackStyle={{ height: 6, borderRadius: 6 }}
+        minimumTrackTintColor={theme.colors.secondary}
+        maximumTrackTintColor="rgba(157, 163, 180, 0.10)"
+      />
+    );
+  };
 
   render() {
     const { profile, editing } = this.state;
@@ -122,21 +141,13 @@ class Settings extends Component {
               <Text gray2 style={{ marginBottom: 10 }}>
                 Round Up
               </Text>
-              <Slider
-                minimumValue={0}
-                maximumValue={100}
-                style={{ height: 19 }}
-                thumbStyle={styles.thumb}
-                trackStyle={{ height: 6, borderRadius: 6 }}
-                minimumTrackTintColor={theme.colors.secondary}
-                maximumTrackTintColor="rgba(157, 163, 180, 0.10)"
-                value={this.state.budget}
-                onValueChange={value => this.setState({ budget: value })}
-              />
+              {this.renderSlider(this.budgetValues, "budgetValuesIndex")}
               <Text caption gray right>
-                {this.state.budget === 100
+                {"Nearest "}
+                {this.budgetValues[this.state.budgetValuesIndex] >= 1
                   ? "Dollar"
-                  : Math.round(this.state.budget) + " Cents"}
+                  : this.budgetValues[this.state.budgetValuesIndex] * 100 +
+                    " Cents"}
               </Text>
             </Block>
             <Block margin={[10, 0]}>
