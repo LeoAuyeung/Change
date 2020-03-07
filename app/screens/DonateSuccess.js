@@ -8,18 +8,16 @@ import {
 
 import { Button, Block, Input, Text } from "../components";
 import { theme } from "../constants";
-import NumericInput from "@wwdrew/react-native-numeric-textinput";
 
-export default class Donate extends Component {
+export default class DonateSuccess extends Component {
   state = {
     errors: [],
     loading: false,
     value: "0",
   };
 
-  handleDonate() {
+  handleReturn() {
     const { navigation } = this.props;
-    const { email, password } = this.state;
     const errors = [];
 
     Keyboard.dismiss();
@@ -31,7 +29,7 @@ export default class Donate extends Component {
     this.setState({ errors, loading: false });
 
     if (!errors.length) {
-      navigation.navigate("DonateSuccess");
+      navigation.navigate("Browse");
     }
   }
 
@@ -44,31 +42,15 @@ export default class Donate extends Component {
       <KeyboardAvoidingView style={styles.login} behavior="padding">
         <Block padding={[0, theme.sizes.base * 2]}>
           <Text h1 bold>
-            Donate directly
-          </Text>
-          <Text h3>
-              Charity: American Red Cross
+            Success!
           </Text>
           <Block middle>
-          <Text>
-              
-          </Text>
-            <Text h3>Amount (USD)</Text>
-            <NumericInput
-                type='currency'
-                decimalPlaces={2}
-                value={value}
-                currency="USD"
-                locale="en-US"
-                onUpdate={(value) => this.setState({value: value})}
-                // style={styles.label}
-            />
-            <Button gradient onPress={() => this.handleDonate()}>
+            <Button gradient onPress={() => this.handleReturn()}>
               {loading ? (
                 <ActivityIndicator size="small" color="white" />
               ) : (
                 <Text bold white center>
-                  Donate
+                  Return to home
                 </Text>
               )}
             </Button>

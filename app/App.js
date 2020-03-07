@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { Platform, StatusBar, StyleSheet, View, TouchableWithoutFeedback, Keyboard } from "react-native";
 
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
@@ -33,6 +33,12 @@ const images = [
   require("./assets/images/donate_3.png")
 ];
 
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+)
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false
@@ -61,10 +67,12 @@ export default class App extends React.Component {
     }
 
     return (
+      <DismissKeyboard>
       <View style={styles.container}>
         {Platform.OS === "ios" && <StatusBar barStyle="default" />}
         <AppNavigator />
       </View>
+      </DismissKeyboard>
     );
   }
 }
