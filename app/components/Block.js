@@ -114,6 +114,7 @@ export default class Block extends Component {
       padding,
       margin,
       animated,
+      horizontal,
       wrap,
       style,
       children,
@@ -127,6 +128,7 @@ export default class Block extends Component {
       row && styles.row,
       column && styles.column,
       center && styles.center,
+      horizontal && styles.horizontal,
       middle && styles.middle,
       left && styles.left,
       right && styles.right,
@@ -174,6 +176,9 @@ export const styles = StyleSheet.create({
   },
   center: {
     alignItems: "center"
+  },
+  horizontal: {
+    paddingHorizontal: theme.sizes.padding
   },
   middle: {
     justifyContent: "center"

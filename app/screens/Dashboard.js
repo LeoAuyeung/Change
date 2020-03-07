@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import CreditCard from "./CreditCard";
 import {
+  Dimensions,
   ScrollView,
+  FlatList,
   View,
   Modal,
   TouchableOpacity,
@@ -12,6 +14,7 @@ import rgba from "hex-to-rgba";
 import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
 
+const { width } = Dimensions.get("window");
 export default class Dashboard extends Component {
   state = {
     showModal: false,
@@ -96,6 +99,35 @@ export default class Dashboard extends Component {
     );
   }
 
+  renderCharities = charity => {
+    return (
+      <TouchableOpacity activeOpacity={0.8} onPress={() => {
+      }}>
+        <Card shadow style={styles.charityStatus}>
+          <Image
+            source={charity.icon}
+            style={styles.charityIcon}
+            resizeMode="contain"
+          />
+          <Text
+            title
+            transform="capitalize"
+            // accent={drive.status === "bad"}
+            // tertiary={drive.status === "fair"}
+            primary
+            height={22}
+          >
+            {charity.name}
+          </Text>
+
+          <Text transform="capitalize" spacing={0.7}>
+            {charity.description}
+          </Text>
+        </Card>
+      </TouchableOpacity>
+    )
+  }
+
   render() {
     const { profile, navigation } = this.props;
 
@@ -107,8 +139,29 @@ export default class Dashboard extends Component {
       },
     ];
 
+    const myCharities = [
+      {
+        id: 1,
+        name: "Team Trees",
+        icon: require('../assets/images/teamtrees.jpg'),
+        description: "Championed by Mr B..."
+      },
+      {
+        id: 2,
+        name: "Direct Relief",
+        icon: require('../assets/images/corona.png'),
+        description: "Corona Virus ef..."
+      },
+      {
+        id: 3,
+        name: "Red Cross",
+        icon: require('../assets/images/redcross.jpg'),
+        description: "Hospitals around the worl..."
+      },
+    ];
+
     return (
-      <Block style={{ alignSelf: "stretch" }}>
+      <ScrollView style={{ alignSelf: "stretch" }}>
         <View style={styles.view}>
           <View>
             <Text style={{ color: theme.colors.caption }}>Welcome Back,</Text>
@@ -124,11 +177,11 @@ export default class Dashboard extends Component {
           </TouchableOpacity>
         </View>
         {this.renderDollarCard()}
-        <Card shadow>
+        <Card shadow horizontal>
           <Block>
-            <Block center>
-              <Text h2 bold>
-                Credit Card ending in <Text primary> 8231</Text>
+            <Block center horizontal>
+              <Text h3>
+                Credit Card ending in <Text h2 bold primary> 8231 </Text>
               </Text>
             </Block>
             <TouchableOpacity onPress={() => this.setState({ showCC: true })}>
@@ -136,23 +189,39 @@ export default class Dashboard extends Component {
             </TouchableOpacity>
           </Block>
         </Card>
-        <Block top>
-          <Text style={[styles.header, { paddingLeft: 16 }]}>
-            Your Charities
-          </Text>
-          <Card shadow>
+        <Block top style={{ paddingHorizontal: theme.sizes.padding}}>
+          <View style={{ flex:1, flexDirection: "row", justifyContent: "space-between"}}>
+            <View>
+              <Text spacing={0.7} transform="uppercase" style={{ marginBottom: 10  }}>
+              Your Charities
+              </Text>
+            </View>
+            <TouchableOpacity>
+              <Text>+</Text>
+            </TouchableOpacity>
+          </View>
             <Block>
-              <Text> Hello </Text>
-            </Block>
-          </Card>
+            <FlatList
+              horizontal
+              pagingEnabled
+              scrollEnabled
+              showsHorizontalScrollIndicator={false}
+              decelerationRate={0}
+              scrollEventThrottle={16}
+              style={{ overflow: "visible" }}
+              data={myCharities}
+              keyExtractor={(item, index) => `${item.id}`}
+              renderItem={({ item }) => this.renderCharities(item)}
+            />
+          </Block>
         </Block>
-        <Block
+        <ScrollView
           style={{ marginBottom: 5, paddingHorizontal: theme.sizes.padding }}
         >
           <Text spacing={0.4} transform="uppercase">
             Recent Transactions
           </Text>
-          <ScrollView>
+          <Block>
             <Block style={{ paddingHorizontal: 10 }}>
               {transactions.map(t => {
                 return (
@@ -215,11 +284,11 @@ export default class Dashboard extends Component {
                 );
               })}
             </Block>
-          </ScrollView>
-        </Block>
+          </Block>
+        </ScrollView>
         {this.renderDonationMessage()}
         {this.renderAddCC()}
-      </Block>
+      </ScrollView>
     );
   }
 }
@@ -229,6 +298,11 @@ Dashboard.defaultProps = {
 };
 
 const styles = StyleSheet.create({
+  charityStatus: {
+    marginRight: theme.sizes.base,
+    width: width / 2.568,
+    height: 170
+  },
   view: {
     flex: 1,
     flexDirection: "row",
@@ -243,7 +317,9 @@ const styles = StyleSheet.create({
     width: theme.sizes.base * 3,
     borderRadius: theme.sizes.padding,
   },
-  header: {
-    fontSize: 24,
+  charityIcon: {
+    height: 50,
+    marginRight: 20,
+    marginBottom: theme.sizes.base
   },
 });
