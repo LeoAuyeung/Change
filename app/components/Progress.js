@@ -40,6 +40,7 @@ class Progress extends Component {
 }
 
 Progress.defaultProps = {
+  // change color of buttons and stuff HERE 
   startColor: "#4F8DFD",
   endColor: "#3FE4D4",
   value: 0.75,
