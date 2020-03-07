@@ -11,7 +11,7 @@
     "@react-navigation/native": "^5.0.9",
     "expo": "^36.0.0",
     "expo-asset": "~8.0.0",
-    "expo-linear-gradient": "~8.0.0",
+    "expo-linear-gradient": "^8.0.0",
     "hex-to-rgba": "^2.0.1",
     "react": "16.9.0",
     "react-dom": "^16.13.0",
