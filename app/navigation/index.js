@@ -12,6 +12,7 @@ import Browse from "../screens/Browse";
 import Product from "../screens/Product";
 import Settings from "../screens/Settings";
 import Charity from "../screens/Charity";
+import SingleCharity from "../screens/SingleCharity";
 
 import { theme } from "../constants";
 
@@ -25,7 +26,8 @@ const screens = createStackNavigator(
     Browse,
     Product,
     Settings,
-    Charity
+    Charity,
+    SingleCharity
   },
   {
     defaultNavigationOptions: {

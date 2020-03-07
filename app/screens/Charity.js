@@ -75,10 +75,15 @@ class Charity extends Component {
 						this.state.charities.map((charity, i) => (
 							<TouchableOpacity
 								key={i}
+								onPress={() =>
+									this.props.navigation.navigate("SingleCharity", {
+										charity: charity,
+										charityImage: charityImages[i]
+									})}
 							>
 								<Card style={styles.categories}>
-									<View style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-										<Card.Cover source={charityImages[i]} style={{width: "100%", maxHeight: (width - theme.sizes.padding * 2.4 - theme.sizes.base)	}}/>
+									<View style={{ display: "flex", alignItems: "center", justifyContent: "cen	ter" }}>
+										<Card.Cover source={charityImages[i]} style={{ width: "100%", maxHeight: (width - theme.sizes.padding * 2.4 - theme.sizes.base) }} />
 									</View>
 									<Card.Content>
 										<Title>{charity.charityName}</Title>
@@ -118,7 +123,7 @@ const styles = StyleSheet.create({
 		shadowRadius: 2.62,
 		elevation: 4,
 	},
-	images:{
+	images: {
 		width: "100%",
 	},
 	category: {
