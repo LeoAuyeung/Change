@@ -96,14 +96,14 @@ export default class Dashboard extends Component {
     );
   }
 
-  renderAddCC() {
+  renderAddCC(navigation) {
     return (
       <Modal
         animationType="slide"
         visible={this.state.showCC}
         onRequestClose={() => this.setState({ showModal: false })}
       >
-        <CreditCard />
+        <CreditCard navigation={navigation} />
       </Modal>
     );
   }
@@ -205,7 +205,7 @@ export default class Dashboard extends Component {
             </Block>
             <Block middle>
               <Text size={theme.sizes.base} spacing={0.4} medium white>
-                Credit Card ending in
+                Active Credit Card, ending in 
               </Text>
               <Text size={20} spacing={0.4} bold white>
                 8864
@@ -224,6 +224,7 @@ export default class Dashboard extends Component {
       {
         id: 1,
         name: "Beyond Burger",
+        source: "https://images.unsplash.com/photo-1582125775166-2eb4da2fbf1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1783&q=80",
         date: "11/10/2020",
         newTotal: "11.71",
         price: 0.55,
@@ -322,60 +323,62 @@ export default class Dashboard extends Component {
             <Block style={{paddingTop: 10}}>
               {transactions.map(t => {
                 return (
-                  <Card shadow key={`transaction-${t.id}`}>
-                    <Block
-                      style={{ marginBottom: theme.sizes.base }}
-                    >
+                  <TouchableOpacity onPress={() => navigation.navigate("Transactions", { t })} activeOpacity={0.7}>
+                    <Card shadow key={`transaction-${t.id}`}>
                       <Block
-                        row
-                        space="between"
                         style={{ marginBottom: theme.sizes.base }}
                       >
-                        <Text spacing={0.5} caption>
-                          {t.name}
-                        </Text>
-                        <Text spacing={0.5} caption medium primary>
-                          ${t.newTotal}
-                        </Text>
-                        <Text spacing={0.5} caption>
-                          {t.date}
-                        </Text>
-                      </Block>
+                        <Block
+                          row
+                          space="between"
+                          style={{ marginBottom: theme.sizes.base }}
+                        >
+                          <Text spacing={0.5} caption>
+                            {t.name}
+                          </Text>
+                          <Text spacing={0.5} caption medium primary>
+                            ${t.newTotal}
+                          </Text>
+                          <Text spacing={0.5} caption>
+                            {t.date}
+                          </Text>
+                        </Block>
 
-                      <Block space="between">
-                        <Block row space="between">
-                          <Text> Transaction Price</Text>
-                          <Text> Change</Text>
-                        </Block>
-                        <Block row space="between">
-                          <Block style={{ marginRight: 170}} row center>
-                            <Badge
-                              color={rgba(theme.colors.accent, "0.2")}
-                              size={14}
-                              style={{ marginRight: 10 }}
-                            >
-                              <Badge color={theme.colors.accent} size={8} />
-                            </Badge>
-                            <Text style={{fontSize:20}} spacing={0.5} color="gray">
-                              ${t.transactionPrice}
-                            </Text>
+                        <Block space="between">
+                          <Block row space="between">
+                            <Text> Transaction Price</Text>
+                            <Text> Change</Text>
                           </Block>
-                          <Block row center>
-                            <Badge
-                              color={rgba(theme.colors.primary, "0.2")}
-                              size={14}
-                              style={{ marginRight: 10 }}
-                            >
-                              <Badge color={theme.colors.primary} size={8} />
-                            </Badge>
-                            <Text style={{fontSize:20}} spacing={0.5} color="gray">
-                              ${t.price}
-                            </Text>
+                          <Block row space="between">
+                            <Block style={{ marginRight: 170}} row center>
+                              <Badge
+                                color={rgba(theme.colors.accent, "0.2")}
+                                size={14}
+                                style={{ marginRight: 10 }}
+                              >
+                                <Badge color={theme.colors.accent} size={8} />
+                              </Badge>
+                              <Text style={{fontSize:20}} spacing={0.5} color="gray">
+                                ${t.transactionPrice}
+                              </Text>
+                            </Block>
+                            <Block row center>
+                              <Badge
+                                color={rgba(theme.colors.primary, "0.2")}
+                                size={14}
+                                style={{ marginRight: 10 }}
+                              >
+                                <Badge color={theme.colors.primary} size={8} />
+                              </Badge>
+                              <Text style={{fontSize:20}} spacing={0.5} color="gray">
+                                ${t.price}
+                              </Text>
+                            </Block>
                           </Block>
                         </Block>
                       </Block>
-                    </Block>
-                  </Card>
+                    </Card>
+                  </TouchableOpacity>
                 );
               })}
                 <Button gradient>
@@ -387,7 +390,7 @@ export default class Dashboard extends Component {
           </Block>
         </ScrollView>
         {this.renderDonationMessage()}
-        {this.renderAddCC()}
+        {this.renderAddCC(navigation)}
       </ScrollView>
     );
   }

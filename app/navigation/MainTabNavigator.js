@@ -8,6 +8,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import Welcome from "../screens/Welcome";
 import Login from "../screens/Login";
 import SignUp from "../screens/SignUp";
+import Transactions from '../screens/Transactions';
 import Dashboard from "../screens/Dashboard";
 import Forgot from "../screens/Forgot";
 import Explore from "../screens/Explore";
@@ -26,6 +27,7 @@ const MainStack = createStackNavigator(
     Login,
     SignUp,
     Forgot,
+    Transactions,
     Explore,
     Dashboard,
     Browse,
