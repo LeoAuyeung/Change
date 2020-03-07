@@ -3,7 +3,7 @@ import {
   ActivityIndicator,
   Keyboard,
   KeyboardAvoidingView,
-  StyleSheet
+  StyleSheet,
 } from "react-native";
 
 import { Button, Block, Input, Text } from "../components";
@@ -17,7 +17,7 @@ export default class Login extends Component {
     email: VALID_EMAIL,
     password: VALID_PASSWORD,
     errors: [],
-    loading: false
+    loading: false,
   };
 
   handleLogin() {
@@ -39,7 +39,8 @@ export default class Login extends Component {
     this.setState({ errors, loading: false });
 
     if (!errors.length) {
-      navigation.navigate("Browse");
+      // navigation.navigate("Browse");
+      navigation.navigate("Dashboard");
     }
   }
 
@@ -100,15 +101,15 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   login: {
     flex: 1,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   input: {
     borderRadius: 0,
     borderWidth: 0,
     borderBottomColor: theme.colors.gray2,
-    borderBottomWidth: StyleSheet.hairlineWidth
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   hasErrors: {
-    borderBottomColor: theme.colors.accent
-  }
+    borderBottomColor: theme.colors.accent,
+  },
 });

@@ -10,11 +10,6 @@ import AppNavigator from "./navigation/AppNavigator";
 const images = [
   require("./assets/icons/back.png"),
   require("./assets/icons/plants.png"),
-  require("./assets/icons/seeds.png"),
-  require("./assets/icons/flowers.png"),
-  require("./assets/icons/sprayers.png"),
-  require("./assets/icons/pots.png"),
-  require("./assets/icons/fertilizers.png"),
   require("./assets/images/plants_1.png"),
   require("./assets/images/plants_2.png"),
   require("./assets/images/plants_3.png"),

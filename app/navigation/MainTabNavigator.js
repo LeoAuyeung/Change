@@ -8,6 +8,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import Welcome from "../screens/Welcome";
 import Login from "../screens/Login";
 import SignUp from "../screens/SignUp";
+import Dashboard from "../screens/Dashboard";
 import Forgot from "../screens/Forgot";
 import Explore from "../screens/Explore";
 import Browse from "../screens/Browse";
@@ -18,7 +19,7 @@ import DonateSuccess from "../screens/DonateSuccess";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
-  default: {}
+  default: {},
 });
 
 const MainStack = createStackNavigator(
@@ -28,6 +29,7 @@ const MainStack = createStackNavigator(
     SignUp,
     Forgot,
     Explore,
+    Dashboard,
     Browse,
     Product,
     Settings,
@@ -37,25 +39,42 @@ const MainStack = createStackNavigator(
   config
 );
 
-MainStack.navigationOptions = {
-  tabBarLabel: "Main",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
+MainStack.navigationOptions = ({ navigation }) => {
+  let routesToNotShowNavTabs = ["Welcome", "SignUp", "Login", "Forgot"];
+
+  let tabBarVisible;
+
+  if (navigation.state.routes.length > 0) {
+    navigation.state.routes.map(route => {
+      if (routesToNotShowNavTabs.includes(route.routeName)) {
+        tabBarVisible = false;
+      } else {
+        tabBarVisible = true;
       }
-    />
-  )
+    });
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: "Main",
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={
+          Platform.OS === "ios"
+            ? `ios-information-circle${focused ? "" : "-outline"}`
+            : "md-information-circle"
+        }
+      />
+    )
+  };
 };
 
 MainStack.path = "";
 
 const CharityStack = createStackNavigator(
   {
-    Explore
+    Explore,
   },
   config
 );
@@ -71,14 +90,14 @@ CharityStack.navigationOptions = {
           : "md-information-circle"
       }
     />
-  )
+  ),
 };
 
 CharityStack.path = "";
 
 const NewsStack = createStackNavigator(
   {
-    Settings
+    Settings,
   },
   config
 );
@@ -94,7 +113,7 @@ NewsStack.navigationOptions = {
           : "md-information-circle"
       }
     />
-  )
+  ),
 };
 
 NewsStack.path = "";
@@ -102,7 +121,7 @@ NewsStack.path = "";
 const tabNavigator = createBottomTabNavigator({
   MainStack,
   CharityStack,
-  NewsStack
+  NewsStack,
 });
 
 tabNavigator.path = "";

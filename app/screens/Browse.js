@@ -68,6 +68,9 @@ class Browse extends Component {
           <Button onPress={() => navigation.navigate("Settings")}>
             <Image source={profile.avatar} style={styles.avatar} />
           </Button>
+          <Button onPress={() => navigation.navigate("Charity")}>
+            <Image source={profile.avatar} style={styles.avatar} />
+          </Button>
         </Block>
           
         {/* top navigation tabs */}
