@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from "react-native";
+import { NavigationActions } from "react-navigation";
 import Slider from "react-native-slider";
 
 import { Divider, Button, Block, Text, Switch } from "../components";
@@ -80,6 +81,7 @@ class Settings extends Component {
 
   render() {
     const { profile, editing } = this.state;
+    const { navigation } = this.props;
 
     return (
       <Block>
@@ -174,6 +176,23 @@ class Settings extends Component {
                 {this.state.monthly.toFixed(2)}
               </Text>
             </Block>
+          </Block>
+          <Divider />
+          <Block middle margin={[20]} padding={[theme.sizes.base / 2, 0]}>
+            <Button
+              gradient
+              onPress={() =>
+                navigation.navigate(
+                  "MainStack",
+                  {},
+                  NavigationActions.navigate({ routeName: "Welcome" })
+                )
+              }
+            >
+              <Text white center>
+                Sign Out
+              </Text>
+            </Button>
           </Block>
         </ScrollView>
       </Block>
