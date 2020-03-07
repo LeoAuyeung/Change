@@ -11,35 +11,35 @@ const categories = [
     name: "Seeds",
     tags: ["products", "shop"],
     count: 16,
-    image: require("../assets/icons/seeds.png")
+    image: require("../assets/icons/plants.png")
   },
   {
     id: "flowers",
     name: "Flowers",
     tags: ["products", "inspirations"],
     count: 68,
-    image: require("../assets/icons/flowers.png")
+    image: require("../assets/icons/plants.png")
   },
   {
     id: "sprayers",
     name: "Sprayers",
     tags: ["products", "shop"],
     count: 17,
-    image: require("../assets/icons/sprayers.png")
+    image: require("../assets/icons/plants.png")
   },
   {
     id: "pots",
     name: "Pots",
     tags: ["products", "shop"],
     count: 47,
-    image: require("../assets/icons/pots.png")
+    image: require("../assets/icons/plants.png")
   },
   {
     id: "fertilizers",
     name: "fertilizers",
     tags: ["products", "shop"],
     count: 47,
-    image: require("../assets/icons/fertilizers.png")
+    image: require("../assets/icons/plants.png")
   }
 ];
 
@@ -86,4 +86,7 @@ const profile = {
   newsletter: false
 };
 
-export { categories, explore, products, profile };
+const charities = [
+  "../assets/images/explore_6.png",
+]
+export { categories, explore, products, profile, charities };
