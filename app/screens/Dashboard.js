@@ -31,7 +31,7 @@ export default class Dashboard extends Component {
     this.setState({ showModal: true });
   }
 
-  renderDollarCard() {
+  renderDollarCard(navigation) {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
@@ -283,18 +283,16 @@ export default class Dashboard extends Component {
           </TouchableOpacity>
         </View>
         <Block horizontal>
-          {this.renderDollarCard()}
+          {this.renderDollarCard(navigation)}
         </Block>
         {this.renderCC()}
         <Block top style={{ paddingHorizontal: theme.sizes.padding}}>
           <View style={{ flex:1, flexDirection: "row", justifyContent: "space-between"}}>
-            <View>
-              <Text spacing={0.7} transform="uppercase" style={{ marginBottom: 10  }}>
+            <Text spacing={0.7} transform="uppercase" style={{ marginTop: 10  }}>
               Your Charities
-              </Text>
-            </View>
-            <TouchableOpacity>
-              <Text>+</Text>
+            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Browse")}>
+              <Text style={{fontSize: 30, marginBottom: 5, marginRight: 5}}>+</Text>
             </TouchableOpacity>
           </View>
             <Block>
