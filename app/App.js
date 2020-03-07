@@ -1,12 +1,10 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { Platform, StatusBar, StyleSheet, View } from "react-native";
 
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 
-import Navigation from "./navigation";
-import { Block } from "./components";
-
+import AppNavigator from "./navigation/AppNavigator";
 
 // import all used images
 const images = [
@@ -47,7 +45,6 @@ export default class App extends React.Component {
 
     return Promise.all(cacheImages);
   };
-  
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -61,11 +58,17 @@ export default class App extends React.Component {
     }
 
     return (
-      <Block white>
-        <Navigation />
-      </Block>
+      <View style={styles.container}>
+        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+        <AppNavigator />
+      </View>
     );
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff"
+  }
+});
