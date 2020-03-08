@@ -88,7 +88,7 @@ export default class DonateSuccess extends Component {
             </Text>
             <Button gradient onPress={() => this.props.navigation.pop(2)}>
               <Text white center>
-                Cancel
+                Return to Charity
             </Text>
             </Button>
           </View>
