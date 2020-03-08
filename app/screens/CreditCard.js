@@ -33,27 +33,31 @@ const s = StyleSheet.create({
     width: '100%',
     height: '50%',
     alignItems: 'center',
-}
+  }
 });
 
 class CreditCard extends Component {
-  state = {
-    useLiteCreditCardInput: false
+
+  state = { 
+    useLiteCreditCardInput: false,
+    complete: true
   };
 
   _onChange = form => {
     console.log(form)
     if (
-      form["values"]["number"].length === 19 && 
-      form["values"]["postalCode"].length === 5 && 
+      form["values"]["number"].length === 19 &&
+      form["values"]["postalCode"].length === 5 &&
       form["status"]["number"] != "invalid" &&
       form["status"]["cvc"] === "valid" &&
       form["status"]["expiry"] === "valid" &&
       form["status"]["name"] === "valid"
-      ) {
+    ) {
       console.log(form["values"]["number"])
       this.props.storeCard(form["values"]["number"])
       this.props.newCard(form["values"]["number"])
+      this.props.hide()
+      this.props.navigation.navigate('Success');
     }
   }
   _onFocus = field => console.log("focusing", field);
@@ -63,11 +67,11 @@ class CreditCard extends Component {
   render() {
     return (
       <View style={s.container}>
-        <Switch
-          style={s.switch}
-          onValueChange={this._setUseLiteCreditCardInput}
-          value={this.state.useLiteCreditCardInput}
-        />
+          <Switch
+            style={s.switch}
+            onValueChange={this._setUseLiteCreditCardInput}
+            value={this.state.useLiteCreditCardInput}
+          />
 
         {this.state.useLiteCreditCardInput ? (
           <LiteCreditCardInput
@@ -101,23 +105,7 @@ class CreditCard extends Component {
               Go Back
             </Text>
           </Button>
-        </Block>
-        <View style={s.animationContainer}>
-            <LottieView
-            ref={animation => {
-                this.animation = animation;
-            }}
-            style={{
-                width: 300,
-                height: 300,
-                backgroundColor: '#fff',
-            }}
-            source={require('../assets/lottie/checkAnimation.json')}
-            loop={false}
-            // OR find more Lottie files @ https://lottiefiles.com/featured
-            // Just click the one you like, place that file in the 'assets' folder to the left, and replace the above 'require' statement
-            />
-            </View>
+        </Block> 
       </View>
     );
   }

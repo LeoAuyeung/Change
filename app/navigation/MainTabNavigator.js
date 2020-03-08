@@ -18,7 +18,7 @@ import DonateSuccess from "../screens/DonateSuccess";
 import Charity from "../screens/Charity";
 import SingleCharity from "../screens/SingleCharity";
 import CreditCard from "../screens/CreditCard";
-
+import Success from "../screens/Success";
 import { theme } from "../constants";
 
 const config = Platform.select({
@@ -37,7 +37,8 @@ const MainStack = createStackNavigator(
     Product,
     Donate,
     DonateSuccess,
-    CreditCard
+    CreditCard,
+    Success
   },
   {
     defaultNavigationOptions: {
