@@ -122,7 +122,6 @@ class SingleCharity extends Component {
                     ],
                     { cancelable: false }
                   );
-                  console.log("yeooo: ", this.props);
                 } catch (err) {
                   Alert.alert(
                     "Error",
