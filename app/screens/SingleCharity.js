@@ -66,25 +66,22 @@ class SingleCharity extends Component {
 
     return (
       <ScrollView style={styles.flex}>
-        <View style={[styles.flex]}>
+        <View style={styles.charityImageContainer}>
           <Image
             source={charityImage}
-            resizeMode="cover"
-            style={{ width, height: width }}
+            style={styles.charityImage}
           />
         </View>
-        <View style={[styles.flex, styles.content]}>
-          <View style={[styles.flex, styles.contentHeader]}>
-            <Image
-              style={[styles.avatar, styles.shadow]}
-              source={this.logoImages[title]}
-            />
-            <Text style={styles.title}>{title}</Text>
-            <View>
-              <Text style={styles.description}>{charity.mission}</Text>
-            </View>
-          </View>
-        </View>
+				<View style={[styles.flex, styles.contentHeader]}>
+					<Image
+						style={[styles.avatar, styles.shadow]}
+						source={this.logoImages[title]}
+					/>
+					<Text style={styles.title}>{title}</Text>
+					<View>
+						<Text style={styles.description}>{charity.mission}</Text>
+					</View>
+				</View>
         <View style={{}}>
           <Block horizontal>
             <Button gradient>
@@ -168,6 +165,19 @@ const mapDispatch = (dispatch) => {
 export default connect(mapState, mapDispatch)(SingleCharity);
 
 const styles = StyleSheet.create({
+	charityImageContainer: {
+		width: "100%",
+		height: 200,
+    paddingHorizontal: 30,
+		paddingVertical: 15,
+		marginVertical: 25
+	},
+	charityImage: {
+		flex: 1,
+    width: undefined,
+    height: undefined,
+    resizeMode: "contain"
+	},
   flex: {
     flex: 1
   },
