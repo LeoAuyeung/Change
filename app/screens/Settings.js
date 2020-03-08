@@ -186,7 +186,7 @@ class Settings extends Component {
                   {this.budgetValues[this.state.budgetValuesIndex] >= 1
                     ? "Dollar"
                     : this.budgetValues[this.state.budgetValuesIndex] * 100 +
-                      " Cents"}
+                    " Cents"}
                 </Text>
               </Block>
               <Block margin={[10, 0]}>
@@ -215,14 +215,12 @@ class Settings extends Component {
               </Block>
             </Block>
             <Divider />
-            <Block middle margin={[10]} padding={0}>
+            <Block horizontal>
               <Button gradient onPress={this.showModal}>
                 <Text white center>
                   Update Payment Method
                 </Text>
               </Button>
-            </Block>
-            <Block middle margin={[10]} padding={0}>
               <Button
                 gradient
                 onPress={() =>
