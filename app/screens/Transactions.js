@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
 import { Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { Block, Badge, Card, Text, Progress } from "../components";
 import { theme, mocks } from "../constants";
 
-export default class Transactions extends Component {
+class Transactions extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: (
@@ -32,11 +33,14 @@ export default class Transactions extends Component {
       paid,
       category,
     } = this.props.navigation.state.params.t;
+
+    const { charities } = this.props;
+    console.log(charities)
     let Image_Http_URL = { uri: source };
     return (
       <ScrollView>
         <Card shadow style={{ paddingVertical: theme.sizes.base * 2 }}>
-          <Block center style={{ marginBottom: 15 }}>
+          <Block center style={{ marginBottom: 17 }}>
             <Text title spacing={1} style={{ marginVertical: 8 }}>
               {name}
             </Text>
@@ -52,6 +56,7 @@ export default class Transactions extends Component {
             style={{ height: 200, resizeMode: "stretch", margin: 5 }}
           />
 
+          
           <Block row>
             <Block center flex={0.8}>
               <Text size={20} spacing={1} primary>
@@ -76,49 +81,29 @@ export default class Transactions extends Component {
           </Block>
 
           <Block color="gray3" style={styles.hLine} />
-
-          <Block style={{ marginBottom: theme.sizes.base }}>
-            <Block row space="between" style={{ paddingLeft: 6 }}>
-              <Text body spacing={0.7}>
-                Red Cross
-              </Text>
-              <Text primary caption spacing={0.7}>
-                $0.30
-              </Text>
-            </Block>
-            <Progress value={0.3} />
-          </Block>
-
-          <Block style={{ marginBottom: theme.sizes.base }}>
-            <Block row space="between" style={{ paddingLeft: 6 }}>
-              <Text body spacing={0.7}>
-                Team Trees
-              </Text>
-              <Text caption spacing={0.7}>
-                $0.40
-              </Text>
-            </Block>
-            <Progress value={0.4} />
-          </Block>
-
-          <Block style={{ marginBottom: theme.sizes.base }}>
-            <Block row space="between" style={{ paddingLeft: 6 }}>
-              <Text body spacing={0.7}>
-                Cancer Research
-              </Text>
-              <Text caption spacing={0.7}>
-                $0.30
-              </Text>
-            </Block>
-            <Progress endColor="#D37694" value={0.3} />
-          </Block>
+          
+          {charities.map(c => {
+            return (
+              <Block style={{ marginBottom: theme.sizes.base }}>
+                <Block row space="between" style={{ paddingLeft: 6 }}>
+                  <Text size={17} body spacing={0.7}>
+                    {c.charityName}
+                  </Text>
+                  <Text size={17} caption spacing={0.7}>
+                    ${(price/charities.length).toFixed(2)}
+                  </Text>
+                </Block>
+                <Progress value={price/charities.length} />
+              </Block>
+            )
+          })}
 
           <Block color="gray3" style={styles.hLine} />
 
           <Block row center space="between">
-            <Text>Going to charity</Text>
+            <Text bold caption size={20}>Going to Charity</Text>
             <Text size={20} spacing={1} primary>
-              $0.60
+              ${(price*0.9).toFixed(2)}
             </Text>
           </Block>
         </Card>
@@ -143,3 +128,11 @@ const styles = StyleSheet.create({
     width: 1,
   },
 });
+
+const mapState = state => {
+  return {
+    charities: state.charities
+  };
+};
+
+export default connect(mapState)(Transactions);

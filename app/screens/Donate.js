@@ -72,7 +72,7 @@ export default class Donate extends Component {
                 style={[styles.charityLogo]}
               />
             </Block>
-            <Block>
+            <Block style={{padding: 10}}>
               <Text h3>Amount (USD)</Text>
               <NumericInput
                 type="currency"

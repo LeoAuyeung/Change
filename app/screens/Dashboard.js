@@ -110,13 +110,13 @@ class Dashboard extends Component {
                   primary
                   style={{ marginBottom: 6 }}
                 >
-                  5
+                  10
                 </Text>
                 <Text body spacing={0.7}>
-                  African
+                  Trees
                 </Text>
                 <Text body spacing={0.7}>
-                  Children Saved
+                  Planted
                 </Text>
               </Block>
 
