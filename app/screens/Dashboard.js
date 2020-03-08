@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {AsyncStorage} from 'react-native';
 import CreditCard from "./CreditCard";
 import * as Icon from "react-native-vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -18,8 +19,10 @@ import { styles as cardStyles } from "../components/Card";
 import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
 import { StackActions, NavigationActions } from "react-navigation";
-
 const { width } = Dimensions.get("window");
+
+import transactions from "../mocks/transactions";
+import myCharities from "../mocks/charities";
 
 export default class Dashboard extends Component {
   state = {
@@ -27,6 +30,7 @@ export default class Dashboard extends Component {
     showCC: false,
     showTransaction: false,
     showDonationOverview: false,
+    charities: [],
   };
 
   static navigationOptions = {
@@ -34,7 +38,7 @@ export default class Dashboard extends Component {
   };
 
   componentDidMount() {
-    this.setState({ showModal: true });
+    this.setState({showModal: true, charities: myCharities});
   }
 
   renderDollarCard(navigation) {
@@ -58,7 +62,7 @@ export default class Dashboard extends Component {
           <Block>
             <Block center>
               <Text h1 primary>
-                $12.30
+                $12.30{JSON.stringify(this.state.test)}
               </Text>
               <Text spacing={0.71}> Total Donation Amount</Text>
             </Block>
@@ -172,7 +176,7 @@ export default class Dashboard extends Component {
         onPress={() => {
           navigation.navigate("SingleCharity", {
             charity,
-            charityImage: charity.image,
+            charityImage: charity.source,
           });
         }}
       >
@@ -238,72 +242,6 @@ export default class Dashboard extends Component {
   render() {
     const { profile, navigation } = this.props;
 
-    const transactions = [
-      {
-        id: 1,
-        name: "Beyond Burger",
-        category: "Food",
-        source:
-          "https://images.unsplash.com/photo-1582125775166-2eb4da2fbf1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1783&q=80",
-        date: "11/10/2020",
-        newTotal: "12.30",
-        price: 0.8,
-        transactionPrice: 7.2,
-        paid: 8.0,
-      },
-      {
-        id: 1,
-        name: "Microwave",
-        category: "Appliances",
-        source:
-          "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/610ptyvekxl-sl1000-1563196528.jpg?crop=1.00xw:0.502xh;0,0.200xh&resize=1200:*",
-        date: "11/10/2020",
-        newTotal: "11.50",
-        price: 0.7,
-        transactionPrice: 42.3,
-        paid: 43.0,
-      },
-      {
-        id: 1,
-        name: "Starbucks Coffee",
-        category: "Food",
-        source:
-          "https://cdn.vox-cdn.com/thumbor/KbnTFp7Bwl7jn5Jssu-IffIstoM=/0x0:6000x4000/1200x800/filters:focal(1463x1566:2423x2526)/cdn.vox-cdn.com/uploads/chorus_image/image/65808525/shutterstock_1391647442.0.jpg",
-        date: "11/10/2020",
-        newTotal: "10.80",
-        price: 0.74,
-        transactionPrice: 3.26,
-        paid: 4.0,
-      },
-    ];
-
-    const myCharities = [
-      {
-        id: 1,
-        name: "Team Trees",
-        mission:
-          "More than 800,000 people joined #TeamTrees by raising more than $20 million to plant 20 million trees around the world. Wondering where those trees are being planted? Check out the locations for the first trees below.",
-        icon: require("../assets/images/teamtrees.jpg"),
-        image: "https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/72634507_1430880343747588_3676343023645376761_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=104&_nc_ohc=Gg21Cxj1KRMAX_A4qua&oh=35579bce4e0b02b01993f5e1c917ea55&oe=5E8E6F5E",
-        description: "Championed by Mr B...",
-      },
-      {
-        id: 2,
-        name: "Direct Relief",
-        mission: "Direct Relief is a humanitarian aid organization, active in all 50 states and more than 80 countries, with a mission to improve the health and lives of people affected by poverty or emergencies – without regard to politics, religion, or ability to pay.\n",
-        icon: require("../assets/images/corona.png"),
-        image: "https://i1.wp.com/www.directrelief.org/wp-content/uploads/2020/01/0131_2-scaled-e1580492018941.jpg?resize=800%2C450px&ssl=1",
-        description: "Corona Virus ef...",
-      },
-      {
-        id: 3,
-        name: "Red Cross",
-        icon: require("../assets/images/redcross.jpg"),
-        image: "https://www.redcross.org/content/dam/redcross/uncategorized/12/Vol-Banner-volunteer-looking-at-fire-1534x1198.jpg.transform/768/q70/feature/image.jpeg",
-        description: "Hospitals around the worl...",
-      },
-    ];
-
     return (
       <ScrollView style={{ alignSelf: "stretch", marginTop: 15 }}>
         <View style={styles.view}>
@@ -351,7 +289,7 @@ export default class Dashboard extends Component {
               decelerationRate={0}
               scrollEventThrottle={16}
               style={{ overflow: "visible" }}
-              data={myCharities}
+              data={this.state.charities}
               keyExtractor={(item, index) => `${item.id}`}
               renderItem={({ item }) => this.renderCharities(item, navigation)}
             />

@@ -1,6 +1,15 @@
 import React, { Component } from "react";
-import { Dimensions, StyleSheet, ScrollView, View, Image } from "react-native";
-import { Text, Button } from "../components";
+import {
+  TouchableOpacity,
+  Alert,
+  Dimensions,
+  StyleSheet,
+  ScrollView,
+  View,
+  Image,
+  AsyncStorage,
+} from "react-native";
+import { Text, Button, Block } from "../components";
 import { theme } from "../constants";
 
 const { width } = Dimensions.get("window");
@@ -34,7 +43,12 @@ class SingleCharity extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { charity, charityImage } = navigation.state.params;
+    let { charity, charityImage } = navigation.state.params;
+    if (charity.image) {
+      charityImage = {
+        uri: charity.image,
+      };
+    }
     return (
       <ScrollView style={styles.flex}>
         <View style={[styles.flex]}>
@@ -46,18 +60,40 @@ class SingleCharity extends Component {
         </View>
         <View style={[styles.flex, styles.content]}>
           <View style={[styles.flex, styles.contentHeader]}>
-            <Text style={styles.title}>{charity.charityName || charity.name}</Text>
+            <Text style={styles.title}>
+              {charity.charityName || charity.name}
+            </Text>
             <View>
               <Text style={styles.description}>{charity.mission}</Text>
             </View>
           </View>
         </View>
         <View style={{}}>
-          <Button gradient>
-            <Text white center>
-                Donate Now
-            </Text>
-          </Button>
+          <Block horizontal>
+            <Button
+              gradient
+              onPress={async () => {
+                // TODO: add to dashboard
+              }}
+            >
+              <Text white center>
+                Add to Dashboard
+              </Text>
+            </Button>
+
+            <Button
+              onPress={() =>
+                navigation.navigate("Donate", {
+                  charity,
+                })
+              }
+              gradient
+            >
+              <Text white center>
+                Donate directly
+              </Text>
+            </Button>
+          </Block>
         </View>
       </ScrollView>
     );
