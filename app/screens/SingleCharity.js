@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import {
   TouchableOpacity,
   Alert,
@@ -12,6 +13,8 @@ import {
 } from "react-native";
 import { Text, Button, Block } from "../components";
 import { theme } from "../constants";
+import {storeCharityThunk} from "../store/utilities/charities";
+import {storeCardThunk} from "../store/utilities/creditCard";
 
 const { width } = Dimensions.get("window");
 
@@ -84,6 +87,32 @@ class SingleCharity extends Component {
               gradient
               onPress={async () => {
                 // TODO: add to dashboard
+                try {
+                  this.props.storeCharities(charity);
+                  Alert.alert(
+                    'Success',
+                    'Added charity to the dashboard',
+                    [
+                      {
+                        text: 'Cancel',
+                        onPress: () => console.log('Cancel Pressed'),
+                        style: 'cancel',
+                      },
+                      {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    {cancelable: false},
+                  );
+                  console.log("yeooo: ", this.props);
+                } catch(err) {
+                  Alert.alert(
+                    'Error',
+                    err,
+                    [
+                      {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    {cancelable: false},
+                  );
+                }
               }}
             >
               <Text white center>
@@ -109,8 +138,19 @@ class SingleCharity extends Component {
     );
   }
 }
+const mapState = (state) => {
+  return {
+    charities: state.charities
+  }
+}
 
-export default SingleCharity;
+const mapDispatch = (dispatch) => {
+  return {
+    storeCharities: (charity) => dispatch(storeCharityThunk(charity))
+  }
+};
+
+export default connect(mapState, mapDispatch)(SingleCharity);
 
 const styles = StyleSheet.create({
   flex: {
@@ -190,3 +230,5 @@ const styles = StyleSheet.create({
     color: theme.colors.caption,
   },
 });
+
+

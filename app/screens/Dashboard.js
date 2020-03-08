@@ -21,9 +21,12 @@ import { styles as cardStyles } from "../components/Card";
 import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
 import { StackActions, NavigationActions } from "react-navigation";
-import { connect } from "react-redux";
 import { getCardThunk } from "../store/utilities/creditCard";
+import { getCharityThunk, storeCharityThunk } from "../store/utilities/charities";
 const { width } = Dimensions.get("window");
+
+import transactions from "../mocks/transactions";
+import myCharities  from "../mocks/charities";
 
 class Dashboard extends Component {
   state = {
@@ -31,7 +34,6 @@ class Dashboard extends Component {
     showCC: false,
     showTransaction: false,
     showDonationOverview: false,
-    charities: [],
   };
 
   static navigationOptions = {
@@ -39,9 +41,11 @@ class Dashboard extends Component {
   };
 
   async componentDidMount() {
-    this.setState({ showModal: true });
-    await this.props.getCard();
-    console.log(this.props.card);
+    this.props.storeCharity(myCharities);
+    this.props.getCard();
+    this.props.getCharity();
+    this.setState({showModal: true });
+    console.log("helloooo: ",this.props)
   }
 
   showModal = () => {
@@ -255,7 +259,8 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { profile, navigation } = this.props;
+    const { profile, navigation, charities } = this.props;
+    console.log('updated', this.props.charities)
 
     return (
       <ScrollView style={{ alignSelf: "stretch", marginTop: 15 }}>
@@ -304,7 +309,7 @@ class Dashboard extends Component {
               decelerationRate={0}
               scrollEventThrottle={16}
               style={{ overflow: "visible" }}
-              data={this.state.charities}
+              data={myCharities}
               keyExtractor={(item, index) => `${item.id}`}
               renderItem={({ item }) => this.renderCharities(item, navigation)}
             />
@@ -405,12 +410,15 @@ class Dashboard extends Component {
 const mapState = state => {
   return {
     card: state.creditCard,
+    charities: state.charities
   };
 };
 
 const mapDispatch = dispatch => {
   return {
     getCard: () => dispatch(getCardThunk()),
+    getCharity: () => dispatch(getCharityThunk()),
+    storeCharity: (charity) => dispatch(storeCharityThunk((charity)))
   };
 };
 

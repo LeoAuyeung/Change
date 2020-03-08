@@ -91,7 +91,7 @@ class CreditCard extends Component {
         <Block margin={[50]} padding={[theme.sizes.base / 2, 0]}>
           <Button gradient onPress={() => this.props.hide()}>
             <Text white center>
-              Go Back
+              Go Back{this.props.card}
             </Text>
           </Button>
         </Block>
