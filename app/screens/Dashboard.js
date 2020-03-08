@@ -18,10 +18,11 @@ import { styles as cardStyles } from "../components/Card";
 import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
 import { StackActions, NavigationActions } from "react-navigation"
-
+import { connect } from "react-redux";
+import { getCardThunk } from '../store/utilities/creditCard';
 const { width } = Dimensions.get("window");
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   state = {
     showModal: false,
     showCC: false,
@@ -34,9 +35,12 @@ export default class Dashboard extends Component {
   };
 
   
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ showModal: true });
+    await this.props.getCard()
+    console.log(this.props.card)
   }
+
 
   showModal = () => {
     this.setState({
@@ -418,6 +422,20 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+const mapState = (state) => {
+	return {
+		card: state.creditCard
+	}
+}
+
+const mapDispatch = (dispatch) => {
+	return {
+		getCard: () => dispatch(getCardThunk())
+	}
+}
+
+export default connect(mapState, mapDispatch)(Dashboard);
 
 Dashboard.defaultProps = {
   profile: mocks.profile
