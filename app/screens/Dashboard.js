@@ -22,11 +22,14 @@ import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
 import { StackActions, NavigationActions } from "react-navigation";
 import { getCardThunk } from "../store/utilities/creditCard";
-import { getCharityThunk, storeCharityThunk } from "../store/utilities/charities";
+import {
+  getCharityThunk,
+  storeCharityThunk,
+} from "../store/utilities/charities";
 const { width } = Dimensions.get("window");
 
 import transactions from "../mocks/transactions";
-import myCharities  from "../mocks/charities";
+import myCharities from "../mocks/charities";
 
 class Dashboard extends Component {
   state = {
@@ -34,6 +37,8 @@ class Dashboard extends Component {
     showCC: false,
     showTransaction: false,
     showDonationOverview: false,
+    charities: [],
+    creditCard: "4213 2131 2323 2321",
   };
 
   static navigationOptions = {
@@ -44,9 +49,9 @@ class Dashboard extends Component {
     await this.props.storeCharity(myCharities);
     await this.props.getCard();
     await this.props.getCharity();
-    this.setState({showModal: true });
-    await this.props.getCard()
-    console.log(this.props.card.substring(15,19))
+    this.setState({ showModal: true });
+    await this.props.getCard();
+    console.log(this.props.card.substring(15, 19));
   }
 
   showModal = () => {
@@ -61,11 +66,11 @@ class Dashboard extends Component {
     });
   };
 
-  newCreditCard = (number) =>{
+  newCreditCard = number => {
     this.setState({
-      creditCard: number
-    })
-  }
+      creditCard: number,
+    });
+  };
 
   renderDollarCard(navigation) {
     return (
@@ -144,7 +149,11 @@ class Dashboard extends Component {
         visible={this.state.showCC}
         onRequestClose={() => this.setState({ showModal: false })}
       >
-        <CreditCard navigation={navigation} hide={this.hideModal} newCard={this.newCreditCard}/>
+        <CreditCard
+          navigation={navigation}
+          hide={this.hideModal}
+          newCard={this.newCreditCard}
+        />
       </Modal>
     );
   }
@@ -256,7 +265,9 @@ class Dashboard extends Component {
                 Active Credit Card, ending in
               </Text>
               <Text size={20} spacing={0.4} bold white>
-                {this.props.card.length > 0 ? this.props.card.substring(15,19) : this.state.creditCard.substring(15,19)}
+                {this.props.card.length > 0
+                  ? this.props.card.substring(15, 19)
+                  : this.state.creditCard.substring(15, 19)}
               </Text>
             </Block>
           </LinearGradient>
@@ -267,7 +278,7 @@ class Dashboard extends Component {
 
   render() {
     const { profile, navigation, charities } = this.props;
-    console.log('updated', this.props.charities)
+    console.log("updated", this.props.charities);
 
     return (
       <ScrollView style={{ alignSelf: "stretch", marginTop: 15 }}>
@@ -414,11 +425,10 @@ class Dashboard extends Component {
   }
 }
 
-<<<<<<< HEAD
 const mapState = state => {
   return {
     card: state.creditCard,
-    charities: state.charities
+    charities: state.charities,
   };
 };
 
@@ -426,22 +436,9 @@ const mapDispatch = dispatch => {
   return {
     getCard: () => dispatch(getCardThunk()),
     getCharity: () => dispatch(getCharityThunk()),
-    storeCharity: (charity) => dispatch(storeCharityThunk((charity)))
+    storeCharity: charity => dispatch(storeCharityThunk(charity)),
   };
 };
-=======
-const mapState = (state) => {
-	return {
-		card: state.creditCard
-	}
-}
-
-const mapDispatch = (dispatch) => {
-	return {
-		getCard: () => dispatch(getCardThunk())
-	}
-}
->>>>>>> c7325ef414251b257a368f0b01b3ca66b9dd03db
 
 export default connect(mapState, mapDispatch)(Dashboard);
 
