@@ -44,7 +44,7 @@ export default class DonateSuccess extends Component {
     this.setState({ errors, loading: false });
 
     if (!errors.length) {
-      navigation.navigate("Browse");
+      navigation.navigate("Dashboard");
     }
   }
 
