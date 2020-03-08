@@ -84,9 +84,9 @@ class Charity extends Component {
 										charityImage: charityImages[i]
 									})}
 							>
-                <Card style={i === 0 ? {...styles.categories, ...styles.firstCategories} : styles.categories}>
+                <Card style={i === 0 ? {...styles.charity, ...styles.firstCharity} : styles.charity}>
                   <View style={styles.coverContainer}>
-                    <Image source={charityImages[i]} style={styles.image} />
+                    <Image source={charityImages[i]} style={styles.charityImage} />
                   </View>
                   <Card.Content>
                     <Title>{charity.charityName}</Title>
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
 		borderColor: "#ededed",
 		paddingBottom: 12
 	},
-  categories: {
+  charity: {
     justifyContent: "center",
     flexDirection: "row",
     alignItems: "center",
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.62,
     elevation: 4
 	},
-	firstCategories: {
+	firstCharity: {
 		marginTop: 16
 	},
   images: {
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 15
   },
-  image: {
+  charityImage: {
     flex: 1,
     width: undefined,
     height: undefined,
