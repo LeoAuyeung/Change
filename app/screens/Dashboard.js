@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { AsyncStorage } from "react-native";
 import CreditCard from "./CreditCard";
 import * as Icon from "react-native-vector-icons";
+import { connect } from "react-redux";
+import { storeCardThunk } from "../store/utilities/creditCard";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Dimensions,
@@ -18,13 +20,16 @@ import { styles as blockStyles } from "../components/Block";
 import { styles as cardStyles } from "../components/Card";
 import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
-import { StackActions, NavigationActions } from "react-navigation"
-import { connect } from "react-redux";
-import { getCardThunk } from '../store/utilities/creditCard';
-import transactions from "../mocks/transactions";
-import myCharities from "../mocks/charities";
+import { StackActions, NavigationActions } from "react-navigation";
+import { getCardThunk } from "../store/utilities/creditCard";
+import {
+  getCharityThunk,
+  storeCharityThunk,
+} from "../store/utilities/charities";
 const { width } = Dimensions.get("window");
 
+import transactions from "../mocks/transactions";
+import myCharities from "../mocks/charities";
 
 class Dashboard extends Component {
   state = {
@@ -39,11 +44,14 @@ class Dashboard extends Component {
   static navigationOptions = {
     header: null,
   };
-  
+
   async componentDidMount() {
+    await this.props.storeCharity(myCharities);
+    await this.props.getCard();
+    await this.props.getCharity();
     this.setState({ showModal: true });
-    await this.props.getCard()
-    console.log(this.props.card.substring(15,19))
+    await this.props.getCard();
+    console.log(this.props.card.substring(15, 19));
   }
 
   showModal = () => {
@@ -58,11 +66,11 @@ class Dashboard extends Component {
     });
   };
 
-  newCreditCard = (number) =>{
+  newCreditCard = number => {
     this.setState({
-      creditCard: number
-    })
-  }
+      creditCard: number,
+    });
+  };
 
   renderDollarCard(navigation) {
     return (
@@ -141,7 +149,11 @@ class Dashboard extends Component {
         visible={this.state.showCC}
         onRequestClose={() => this.setState({ showModal: false })}
       >
-        <CreditCard navigation={navigation} hide={this.hideModal} newCard={this.newCreditCard}/>
+        <CreditCard
+          navigation={navigation}
+          hide={this.hideModal}
+          newCard={this.newCreditCard}
+        />
       </Modal>
     );
   }
@@ -253,7 +265,9 @@ class Dashboard extends Component {
                 Active Credit Card, ending in
               </Text>
               <Text size={20} spacing={0.4} bold white>
-                {this.props.card.length > 0 ? this.props.card.substring(15,19) : this.state.creditCard.substring(15,19)}
+                {this.props.card.length > 0
+                  ? this.props.card.substring(15, 19)
+                  : this.state.creditCard.substring(15, 19)}
               </Text>
             </Block>
           </LinearGradient>
@@ -263,7 +277,8 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { profile, navigation } = this.props;
+    const { profile, navigation, charities } = this.props;
+    console.log("updated", this.props.charities);
 
     return (
       <ScrollView style={{ alignSelf: "stretch", marginTop: 15 }}>
@@ -312,7 +327,7 @@ class Dashboard extends Component {
               decelerationRate={0}
               scrollEventThrottle={16}
               style={{ overflow: "visible" }}
-              data={this.state.charities}
+              data={myCharities}
               keyExtractor={(item, index) => `${item.id}`}
               renderItem={({ item }) => this.renderCharities(item, navigation)}
             />
@@ -410,17 +425,20 @@ class Dashboard extends Component {
   }
 }
 
-const mapState = (state) => {
-	return {
-		card: state.creditCard
-	}
-}
+const mapState = state => {
+  return {
+    card: state.creditCard,
+    charities: state.charities,
+  };
+};
 
-const mapDispatch = (dispatch) => {
-	return {
-		getCard: () => dispatch(getCardThunk())
-	}
-}
+const mapDispatch = dispatch => {
+  return {
+    getCard: () => dispatch(getCardThunk()),
+    getCharity: () => dispatch(getCharityThunk()),
+    storeCharity: charity => dispatch(storeCharityThunk(charity)),
+  };
+};
 
 export default connect(mapState, mapDispatch)(Dashboard);
 
