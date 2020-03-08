@@ -194,7 +194,7 @@ class Settings extends Component {
                   Monthly Donation Cap
                 </Text>
                 <Slider
-                  minimumValue={5}
+                  minimumValue={0}
                   maximumValue={100}
                   step={5}
                   style={{ height: 19 }}
