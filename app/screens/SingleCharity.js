@@ -57,6 +57,7 @@ class SingleCharity extends Component {
     const { navigation } = this.props;
     let { charity, charityImage, resizeMode } = navigation.state.params;
     if (charity.image) {
+      charity["image"] = charity.image
       charityImage = {
         uri: charity.image
       };

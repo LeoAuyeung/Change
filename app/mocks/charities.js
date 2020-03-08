@@ -1,7 +1,7 @@
 const myCharities = [
   {
     id: 1,
-    name: "Team Trees",
+    charityName: "Team Trees",
     mission:
       "More than 800,000 people joined #TeamTrees by raising more than $20 million to plant 20 million trees around the world. Wondering where those trees are being planted? Check out the locations for the first trees below.",
     icon: require("../assets/images/teamtrees.jpg"),
@@ -12,7 +12,7 @@ const myCharities = [
   },
   {
     id: 2,
-    name: "Direct Relief",
+    charityName: "Direct Relief",
     websiteURL: "https://www.directrelief.org/",
     mission:
       "Direct Relief is a humanitarian aid organization, active in all 50 states and more than 80 countries, with a mission to improve the health and lives of people affected by poverty or emergencies – without regard to politics, religion, or ability to pay.\n",
@@ -23,7 +23,7 @@ const myCharities = [
   },
   {
     id: 3,
-    name: "Red Cross",
+    charityName: "Red Cross",
     mission:
       "The American Red Cross prevents and alleviates human suffering in the face of emergencies by mobilizing the power of volunteers and the generosity of donors.",
     icon: require("../assets/images/redcross.jpg"),
