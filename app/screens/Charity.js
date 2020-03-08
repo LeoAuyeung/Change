@@ -76,17 +76,27 @@ class Charity extends Component {
         >
           {this.state.charities.length > 0 ? (
             this.state.charities.map((charity, i) => (
-							<TouchableOpacity 
-								key={i}
-								onPress={() =>
-									this.props.navigation.navigate("SingleCharity", {
-										charity: charity,
-										charityImage: charityImages[i]
-									})}
-							>
-                <Card style={i === 0 ? {...styles.charity, ...styles.firstCharity} : styles.charity}>
+              <TouchableOpacity
+                key={i}
+                onPress={() =>
+                  this.props.navigation.navigate("SingleCharity", {
+                    charity: charity,
+                    charityImage: charityImages[i]
+                  })
+                }
+              >
+                <Card
+                  style={
+                    i === 0
+                      ? { ...styles.charity, ...styles.firstCharity }
+                      : styles.charity
+                  }
+                >
                   <View style={styles.coverContainer}>
-                    <Image source={charityImages[i]} style={styles.charityImage} />
+                    <Image
+                      source={charityImages[i]}
+                      style={styles.charityImage}
+                    />
                   </View>
                   <Card.Content>
                     <Title>{charity.charityName}</Title>
@@ -109,11 +119,11 @@ class Charity extends Component {
 export default Charity;
 
 const styles = StyleSheet.create({
-	header: {
-		borderBottomWidth: 1,
-		borderColor: "#ededed",
-		paddingBottom: 12
-	},
+  header: {
+    borderBottomWidth: 1,
+    borderColor: "#ededed",
+    paddingBottom: 12
+  },
   charity: {
     justifyContent: "center",
     flexDirection: "row",
@@ -131,10 +141,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
     elevation: 4
-	},
-	firstCharity: {
-		marginTop: 16
-	},
+  },
+  firstCharity: {
+    marginTop: 16
+  },
   images: {
     width: "100%"
   },
@@ -159,6 +169,6 @@ const styles = StyleSheet.create({
     resizeMode: "contain"
   },
   scrollView: {
-		paddingBottom: 100
+    paddingBottom: 100
   }
 });
