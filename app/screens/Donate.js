@@ -12,16 +12,16 @@ import { theme } from "../constants";
 import NumericInput from "@wwdrew/react-native-numeric-textinput";
 
 const DismissKeyboard = ({ children }) => (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      {children}
-    </TouchableWithoutFeedback>
-)
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
 
 export default class Donate extends Component {
   state = {
     errors: [],
     loading: false,
-    value: "0",
+    value: "0"
   };
 
   handleDonate() {
@@ -48,38 +48,36 @@ export default class Donate extends Component {
     const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
 
     return (
-        <DismissKeyboard>
-      <KeyboardAvoidingView style={styles.login} behavior="padding">
-        <Block padding={[50, theme.sizes.base * 2]}>
-          <Text h1 bold>
-            Donate directly
-          </Text>
-          <Text h3>
-              Charity: American Red Cross
-          </Text>
-          <Block marginTop={200}>
-            <Text h3>Amount (USD)</Text>
-            <NumericInput
-                type='currency'
+      <DismissKeyboard>
+        <KeyboardAvoidingView style={styles.login} behavior="padding">
+          <Block padding={[50, theme.sizes.base * 2]}>
+            <Text h1 bold>
+              Donate directly
+            </Text>
+            <Text h3>Charity: American Red Cross</Text>
+            <Block marginTop={200}>
+              <Text h3>Amount (USD)</Text>
+              <NumericInput
+                type="currency"
                 decimalPlaces={2}
                 value={value}
                 currency="USD"
                 locale="en-US"
-                onUpdate={(value) => this.setState({value: value})}
+                onUpdate={value => this.setState({ value: value })}
                 // style={styles.label}
-            />
-            <Button gradient onPress={() => this.handleDonate()}>
-              {loading ? (
-                <ActivityIndicator size="small" color="white" />
-              ) : (
-                <Text bold white center>
-                  Donate
-                </Text>
-              )}
-            </Button>
+              />
+              <Button gradient onPress={() => this.handleDonate()}>
+                {loading ? (
+                  <ActivityIndicator size="small" color="white" />
+                ) : (
+                  <Text bold white center>
+                    Donate
+                  </Text>
+                )}
+              </Button>
+            </Block>
           </Block>
-        </Block>
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
       </DismissKeyboard>
     );
   }
