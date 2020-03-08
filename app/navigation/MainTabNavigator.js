@@ -85,7 +85,7 @@ MainStack.navigationOptions = ({ navigation }) => {
         name={
           Platform.OS === "ios"
             ? `ios-home`
-            : "md-information-circle"
+            : "md-home"
         }
       />
     )
@@ -142,7 +142,7 @@ CharityStack.navigationOptions = ({ navigation }) => {
         name={
           Platform.OS === "ios"
             ? `ios-heart`
-            : "md-information-circle"
+            : "md-heart"
         }
       />
     ),
