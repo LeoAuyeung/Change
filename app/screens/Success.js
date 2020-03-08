@@ -22,9 +22,9 @@ export default class Success extends Component {
 
 	componentDidMount() {
 		this.animation.play();
-		// setTimeout(() => {
-		// 	this.props.navigation.goBack(null);
-		// }, 2000);
+		setTimeout(() => {
+			this.props.navigation.goBack(null);
+		}, 2000);
 	}
 
 	render() {
