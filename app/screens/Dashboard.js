@@ -285,9 +285,7 @@ export default class Dashboard extends Component {
           <TouchableOpacity onPress={() => navigation.navigate('SettingsStack', {}, NavigationActions.navigate({ routeName: 'Settings' }))}>
             <Image
               style={styles.avatar}
-              source={{
-                uri: "https://randomuser.me/api/portraits/women/32.jpg",
-              }}
+              source={profile.avatar}
             />
           </TouchableOpacity>
         </View>

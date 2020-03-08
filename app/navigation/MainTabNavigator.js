@@ -32,7 +32,6 @@ const MainStack = createStackNavigator(
     SignUp,
     Forgot,
     Transactions,
-    Explore,
     Dashboard,
     Product,
     Donate,
@@ -78,7 +77,7 @@ MainStack.navigationOptions = ({ navigation }) => {
 
   return {
     tabBarVisible,
-    tabBarLabel: "Main",
+    tabBarLabel: "Home",
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
         focused={focused}
