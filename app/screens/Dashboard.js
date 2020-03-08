@@ -38,6 +38,19 @@ export default class Dashboard extends Component {
     this.setState({ showModal: true });
   }
 
+  showModal = () => {
+    this.setState({
+      showCC: true
+    });
+  };
+
+  hideModal = () => {
+    this.setState({
+      showCC: false
+    });
+  };
+
+
   renderDollarCard(navigation) {
     return (
       <TouchableOpacity
@@ -110,7 +123,7 @@ export default class Dashboard extends Component {
         visible={this.state.showCC}
         onRequestClose={() => this.setState({ showModal: false })}
       >
-        <CreditCard navigation={navigation} />
+        <CreditCard navigation={navigation} hide={this.hideModal}/>
       </Modal>
     );
   }
@@ -334,7 +347,7 @@ export default class Dashboard extends Component {
               {transactions.map((t,i) => {
                 return (
                   <TouchableOpacity onPress={() => navigation.navigate("Transactions", { t })} activeOpacity={0.7}>
-                    <Card shadow key={i}>
+                    <Card shadow key={i*1000}>
                       <Block
                         style={{ marginBottom: theme.sizes.base }}
                       >
