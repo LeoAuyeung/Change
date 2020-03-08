@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 
 import axios from "axios";
@@ -30,15 +30,17 @@ const charityImages = [
   require("../assets/images/riverkeeper.jpg"),
   require("../assets/images/rainforest-alliance.png"),
   require("../assets/images/riverside-park-conservancy.png"),
-  require("../assets/images/city-parks-foundation.png")
+  require("../assets/images/city-parks-foundation.png"),
 ];
+
+import myCharities from "../mocks/charities";
 
 class Charity extends Component {
   _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
-      charities: []
+      charities: [],
     };
   }
 
@@ -50,7 +52,7 @@ class Charity extends Component {
       );
       if (this._isMounted) {
         this.setState({
-          charities: data.slice(0, 15)
+          charities: data.slice(0, 15),
         });
       }
     } catch (err) {
@@ -63,6 +65,12 @@ class Charity extends Component {
   }
 
   render() {
+    // let missionSS;
+    // if (charity.mission && charity.mission.substring) {
+    //   missionSS = charity.mission.substring;
+    // } else {
+    //   missionSS = charity.mission
+    // }
     return (
       <Block>
         <Block flex={false} row space="around" style={styles.header}>
@@ -81,7 +89,7 @@ class Charity extends Component {
                 onPress={() =>
                   this.props.navigation.navigate("SingleCharity", {
                     charity: charity,
-                    charityImage: charityImages[i]
+                    charityImage: charityImages[i],
                   })
                 }
               >
@@ -122,7 +130,7 @@ const styles = StyleSheet.create({
   header: {
     borderBottomWidth: 1,
     borderColor: "#ededed",
-    paddingBottom: 12
+    paddingBottom: 12,
   },
   charity: {
     justifyContent: "center",
@@ -136,14 +144,14 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-    elevation: 4
+    elevation: 4,
   },
   firstCharity: {
-    marginTop: 16
+    marginTop: 16,
   },
   coverContainer: {
     width: "100%",
@@ -151,15 +159,15 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 30,
     paddingTop: 15,
-    paddingBottom: 15
+    paddingBottom: 15,
   },
   charityImage: {
     flex: 1,
     width: undefined,
     height: undefined,
-    resizeMode: "contain"
+    resizeMode: "contain",
   },
   scrollView: {
-    paddingBottom: 100
-  }
+    paddingBottom: 100,
+  },
 });
