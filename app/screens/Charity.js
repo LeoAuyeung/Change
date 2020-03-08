@@ -65,7 +65,7 @@ class Charity extends Component {
   render() {
     return (
       <Block>
-        <Block flex={false} row space="around">
+        <Block flex={false} row space="around" style={styles.header}>
           <Text h1 bold>
             Charities
           </Text>
@@ -76,17 +76,27 @@ class Charity extends Component {
         >
           {this.state.charities.length > 0 ? (
             this.state.charities.map((charity, i) => (
-							<TouchableOpacity 
-								key={i}
-								onPress={() =>
-									this.props.navigation.navigate("SingleCharity", {
-										charity: charity,
-										charityImage: charityImages[i]
-									})}
-							>
-                <Card style={styles.categories}>
+              <TouchableOpacity
+                key={i}
+                onPress={() =>
+                  this.props.navigation.navigate("SingleCharity", {
+                    charity: charity,
+                    charityImage: charityImages[i]
+                  })
+                }
+              >
+                <Card
+                  style={
+                    i === 0
+                      ? { ...styles.charity, ...styles.firstCharity }
+                      : styles.charity
+                  }
+                >
                   <View style={styles.coverContainer}>
-                    <Image source={charityImages[i]} style={styles.image} />
+                    <Image
+                      source={charityImages[i]}
+                      style={styles.charityImage}
+                    />
                   </View>
                   <Card.Content>
                     <Title>{charity.charityName}</Title>
@@ -109,7 +119,12 @@ class Charity extends Component {
 export default Charity;
 
 const styles = StyleSheet.create({
-  categories: {
+  header: {
+    borderBottomWidth: 1,
+    borderColor: "#ededed",
+    paddingBottom: 12
+  },
+  charity: {
     justifyContent: "center",
     flexDirection: "row",
     alignItems: "center",
@@ -127,14 +142,8 @@ const styles = StyleSheet.create({
     shadowRadius: 2.62,
     elevation: 4
   },
-  images: {
-    width: "100%"
-  },
-  category: {
-    // this should be dynamic based on screen width
-    minWidth: width - theme.sizes.padding * 2.4 - theme.sizes.base,
-    maxWidth: width - theme.sizes.padding * 2.4 - theme.sizes.base,
-    maxHeight: (width - theme.sizes.padding * 2.4 - theme.sizes.base) / 2
+  firstCharity: {
+    marginTop: 16
   },
   coverContainer: {
     width: "100%",
@@ -144,14 +153,13 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 15
   },
-  image: {
+  charityImage: {
     flex: 1,
     width: undefined,
     height: undefined,
     resizeMode: "contain"
   },
   scrollView: {
-    marginTop: 15,
     paddingBottom: 100
   }
 });
