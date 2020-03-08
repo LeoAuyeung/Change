@@ -23,14 +23,17 @@ const s = StyleSheet.create({
   },
   input: {
     fontSize: 16,
-    color: "black",
+    color: "black", 
   },
 });
 
 export default class CreditCard extends Component {
   state = { useLiteCreditCardInput: false };
 
-  _onChange = formData => console.log(JSON.stringify(formData, null, " "));
+  _onChange = formData =>{
+    // console.log(JSON.stringify(formData, null, " "));
+    console.log(formData)
+  } 
   _onFocus = field => console.log("focusing", field);
   _setUseLiteCreditCardInput = useLiteCreditCardInput =>
     this.setState({ useLiteCreditCardInput });

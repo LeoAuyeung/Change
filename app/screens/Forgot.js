@@ -36,8 +36,8 @@ export default class Forgot extends Component {
 
     if (!errors.length) {
       Alert.alert(
-        "Password sent!",
-        "Please check you email.",
+        "Password recovery email sent!",
+        "Please check your inbox.",
         [
           {
             text: "OK",
@@ -51,7 +51,7 @@ export default class Forgot extends Component {
     } else {
       Alert.alert(
         "Error",
-        "Please check you Email address.",
+        "Please check your email address.",
         [{ text: "Try again" }],
         { cancelable: false }
       );

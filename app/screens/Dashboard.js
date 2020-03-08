@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {AsyncStorage} from 'react-native';
+import { AsyncStorage } from "react-native";
 import CreditCard from "./CreditCard";
 import * as Icon from "react-native-vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -38,8 +38,20 @@ export default class Dashboard extends Component {
   };
 
   componentDidMount() {
-    this.setState({showModal: true, charities: myCharities});
+    this.setState({ showModal: true, charities: myCharities });
   }
+
+  showModal = () => {
+    this.setState({
+      showCC: true,
+    });
+  };
+
+  hideModal = () => {
+    this.setState({
+      showCC: false,
+    });
+  };
 
   renderDollarCard(navigation) {
     return (
@@ -118,7 +130,7 @@ export default class Dashboard extends Component {
         visible={this.state.showCC}
         onRequestClose={() => this.setState({ showModal: false })}
       >
-        <CreditCard navigation={navigation} />
+        <CreditCard navigation={navigation} hide={this.hideModal} />
       </Modal>
     );
   }
@@ -309,7 +321,7 @@ export default class Dashboard extends Component {
                     onPress={() => navigation.navigate("Transactions", { t })}
                     activeOpacity={0.7}
                   >
-                    <Card shadow key={i}>
+                    <Card shadow key={i * 1000}>
                       <Block style={{ marginBottom: theme.sizes.base }}>
                         <Block
                           row
