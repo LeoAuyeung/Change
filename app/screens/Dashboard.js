@@ -212,6 +212,7 @@ class Dashboard extends Component {
           navigation.navigate("SingleCharity", {
             charity,
             charityImage: charity.source,
+            resizeMode: "cover"
           });
         }}
       >
