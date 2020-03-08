@@ -39,7 +39,7 @@ export default class CreditCard extends Component {
     return (
       <View style={s.container}>
         <Block middle margin={[20]} padding={[theme.sizes.base / 2, 0]}>
-          <Button gradient onPress={() => this.props.navigation.goBack()}>
+          <Button gradient onPress={() => this.props.hide()}>
             <Text white center>
               Go Back
             </Text>
