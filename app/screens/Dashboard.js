@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { AsyncStorage } from "react-native";
 import CreditCard from "./CreditCard";
 import * as Icon from "react-native-vector-icons";
+import { connect } from 'react-redux';
+import { storeCardThunk } from '../store/utilities/creditCard';
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Dimensions,
