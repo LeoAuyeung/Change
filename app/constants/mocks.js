@@ -1,48 +1,3 @@
-const categories = [
-  {
-    id: "plants",
-    name: "Plants",
-    tags: ["products", "inspirations"],
-    count: 147,
-    image: require("../assets/icons/plants.png")
-  },
-  {
-    id: "seeds",
-    name: "Seeds",
-    tags: ["products", "shop"],
-    count: 16,
-    image: require("../assets/icons/plants.png")
-  },
-  {
-    id: "flowers",
-    name: "Flowers",
-    tags: ["products", "inspirations"],
-    count: 68,
-    image: require("../assets/icons/plants.png")
-  },
-  {
-    id: "sprayers",
-    name: "Sprayers",
-    tags: ["products", "shop"],
-    count: 17,
-    image: require("../assets/icons/plants.png")
-  },
-  {
-    id: "pots",
-    name: "Pots",
-    tags: ["products", "shop"],
-    count: 47,
-    image: require("../assets/icons/plants.png")
-  },
-  {
-    id: "fertilizers",
-    name: "fertilizers",
-    tags: ["products", "shop"],
-    count: 47,
-    image: require("../assets/icons/plants.png")
-  }
-];
-
 const products = [
   {
     id: 1,
@@ -52,28 +7,16 @@ const products = [
     tags: ["Interior", "27 m²", "Ideas"],
     images: [
       require("../assets/images/plants_1.png"),
-      require("../assets/images/plants_2.png"),
       require("../assets/images/plants_3.png"),
       // showing only 3 images, show +6 for the rest
       require("../assets/images/plants_1.png"),
-      require("../assets/images/plants_2.png"),
       require("../assets/images/plants_3.png"),
       require("../assets/images/plants_1.png"),
-      require("../assets/images/plants_2.png"),
       require("../assets/images/plants_3.png")
     ]
   }
 ];
 
-const explore = [
-  // images
-  require("../assets/images/explore_1.png"),
-  require("../assets/images/explore_2.png"),
-  require("../assets/images/explore_3.png"),
-  require("../assets/images/explore_4.png"),
-  require("../assets/images/explore_5.png"),
-  require("../assets/images/explore_6.png")
-];
 
 const profile = {
   username: "miguel.acero",
@@ -86,5 +29,5 @@ const profile = {
   newsletter: false
 };
 
-const charities = ["../assets/images/explore_6.png"];
-export { categories, explore, products, profile, charities };
+
+export { products, profile };

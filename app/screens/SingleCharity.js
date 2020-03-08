@@ -3,15 +3,11 @@ import {
 	Dimensions,
 	StyleSheet,
 	ScrollView,
-	TouchableOpacity,
 	View,
 	Image
 } from "react-native";
-import axios from 'axios';
-import { Card, Title, Paragraph } from 'react-native-paper';
-import { Block, Text } from "../components";
+import { Text } from "../components";
 import { theme } from "../constants";
-import Charity from "./Charity";
 
 const { width } = Dimensions.get("window")
 
