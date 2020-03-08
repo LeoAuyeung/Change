@@ -65,7 +65,7 @@ class Charity extends Component {
   render() {
     return (
       <Block>
-        <Block flex={false} row space="around">
+        <Block flex={false} row space="around" style={styles.header}>
           <Text h1 bold>
             Charities
           </Text>
@@ -84,7 +84,7 @@ class Charity extends Component {
 										charityImage: charityImages[i]
 									})}
 							>
-                <Card style={styles.categories}>
+                <Card style={i === 0 ? {...styles.categories, ...styles.firstCategories} : styles.categories}>
                   <View style={styles.coverContainer}>
                     <Image source={charityImages[i]} style={styles.image} />
                   </View>
@@ -109,6 +109,11 @@ class Charity extends Component {
 export default Charity;
 
 const styles = StyleSheet.create({
+	header: {
+		borderBottomWidth: 1,
+		borderColor: "#ededed",
+		paddingBottom: 12
+	},
   categories: {
     justifyContent: "center",
     flexDirection: "row",
@@ -126,7 +131,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
     elevation: 4
-  },
+	},
+	firstCategories: {
+		marginTop: 16
+	},
   images: {
     width: "100%"
   },
@@ -151,7 +159,6 @@ const styles = StyleSheet.create({
     resizeMode: "contain"
   },
   scrollView: {
-    marginTop: 15,
-    paddingBottom: 100
+		paddingBottom: 100
   }
 });
