@@ -51,10 +51,9 @@ class Dashboard extends Component {
     await this.props.storeCharity(myCharities[2]);
     await this.props.getCard();
     await this.props.getCharity();
-    console.log(this.props.charities)
-    this.setState({ showModal: true });
+    // console.log(this.props.charities)
+    this.setState({ showModal: false });
     await this.props.getCard();
-    console.log(this.props.card.substring(15, 19));
   }
 
   showModal = () => {
