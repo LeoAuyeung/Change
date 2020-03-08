@@ -1,0 +1,17 @@
+{
+  "name": "change-backend",
+  "version": "1.0.0",
+  "description": "backend for change app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "AceroM",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "plaid": "^4.8.0",
+    "uuid": "^7.0.2"
+  }
+}
