@@ -18,13 +18,15 @@ import { styles as blockStyles } from "../components/Block";
 import { styles as cardStyles } from "../components/Card";
 import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
-import { StackActions, NavigationActions } from "react-navigation";
-const { width } = Dimensions.get("window");
-
+import { StackActions, NavigationActions } from "react-navigation"
+import { connect } from "react-redux";
+import { getCardThunk } from '../store/utilities/creditCard';
 import transactions from "../mocks/transactions";
 import myCharities from "../mocks/charities";
+const { width } = Dimensions.get("window");
 
-export default class Dashboard extends Component {
+
+class Dashboard extends Component {
   state = {
     showModal: false,
     showCC: false,
@@ -36,9 +38,11 @@ export default class Dashboard extends Component {
   static navigationOptions = {
     header: null,
   };
-
-  componentDidMount() {
-    this.setState({ showModal: true, charities: myCharities });
+  
+  async componentDidMount() {
+    this.setState({ showModal: true });
+    await this.props.getCard()
+    console.log(this.props.card)
   }
 
   showModal = () => {
@@ -398,6 +402,20 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+const mapState = (state) => {
+	return {
+		card: state.creditCard
+	}
+}
+
+const mapDispatch = (dispatch) => {
+	return {
+		getCard: () => dispatch(getCardThunk())
+	}
+}
+
+export default connect(mapState, mapDispatch)(Dashboard);
 
 Dashboard.defaultProps = {
   profile: mocks.profile,
