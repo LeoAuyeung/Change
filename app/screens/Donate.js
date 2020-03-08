@@ -25,7 +25,7 @@ export default class Donate extends Component {
     value: "0"
   };
 
-  handleDonate() {
+  handleDonate(charityName) {
     const { navigation } = this.props;
     const { email, password } = this.state;
     const errors = [];
@@ -39,13 +39,19 @@ export default class Donate extends Component {
     this.setState({ errors, loading: false });
 
     if (!errors.length) {
-      navigation.navigate("DonateSuccess");
+      navigation.navigate("DonateSuccess", {charity: charityName, donationAmount: this.state.value});
     }
   }
 
   render() {
     const { navigation } = this.props;
+    let { charity, charityImage } = navigation.state.params;
     const { loading, errors, value } = this.state;
+    if (charity.image) {
+      charityImage = {
+        uri: charity.image
+      };
+    }
     const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
 
     return (
@@ -58,11 +64,11 @@ export default class Donate extends Component {
                   Donate directly
                 </Text>
                 <Text h3 style={styles.charityName}>
-                  Charity: American Red Cross
+                  {charity.charityName}
                 </Text>
               </Block>
               <Image
-                source={require("../assets/images/redcross.jpg")}
+                source={charityImage}
                 style={[styles.charityLogo]}
               />
             </Block>
@@ -77,10 +83,10 @@ export default class Donate extends Component {
                 onUpdate={value => this.setState({ value: value })}
                 style={styles.label}
               />
-              <Text caption styles={styles.minimumDonation}>
+              <Text caption styles={styles.minimumDonation} on>
                 There is a minimum donation of $1.
               </Text>
-              <Button gradient onPress={() => this.handleDonate()}>
+              <Button gradient onPress={() => this.handleDonate(charity.charityName)}>
                 {loading ? (
                   <ActivityIndicator size="small" color="white" />
                 ) : (

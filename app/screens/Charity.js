@@ -12,6 +12,7 @@ import axios from "axios";
 import { Card, Title, Paragraph } from "react-native-paper";
 import { Block, Text } from "../components";
 import { theme } from "../constants";
+import LottieView from "lottie-react-native";
 
 const { width } = Dimensions.get("window");
 
@@ -45,6 +46,7 @@ class Charity extends Component {
   }
 
   async componentDidMount() {
+    this.animation.play();
     this._isMounted = true;
     try {
       let { data } = await axios.get(
@@ -72,7 +74,7 @@ class Charity extends Component {
     //   missionSS = charity.mission
     // }
     return (
-      <Block>
+      <View>
         <Block flex={false} row space="around" style={styles.header}>
           <Text h1 bold>
             Charities
@@ -116,10 +118,24 @@ class Charity extends Component {
               </TouchableOpacity>
             ))
           ) : (
-            <View></View>
-          )}
+              <View style={styles.animationContainer}>
+                <LottieView
+                  ref={animation => {
+                    this.animation = animation;
+                  }}
+                  style={{
+                    width: 300,
+                    height: 300,
+                    alignSelf: "center",
+                    backgroundColor: '#fff',
+                  }}
+                  source={require('../assets/lottie/222-trail-loading.json')}
+                  loop={true}
+                />
+              </View>
+            )}
         </ScrollView>
-      </Block>
+      </View>
     );
   }
 }
@@ -170,4 +186,11 @@ const styles = StyleSheet.create({
   scrollView: {
     paddingBottom: 100,
   },
+  animationContainer: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: "center"
+  }
 });
