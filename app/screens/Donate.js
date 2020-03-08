@@ -90,6 +90,7 @@ export default class Donate extends Component {
                 There is a minimum donation of $1.
               </Text>
               <Button
+                style={styles.donateButton}
                 gradient
                 onPress={() => this.handleDonate(charity.charityName)}
               >
@@ -126,8 +127,9 @@ const styles = StyleSheet.create({
   label: {
     borderColor: "black",
     borderWidth: 1,
-    paddingLeft: 10,
-    marginVertical: 10
+    padding: 7,
+    marginVertical: 10,
+    maxWidth: "30%"
   },
   minimumDonation: {
     marginBottom: 25
@@ -139,5 +141,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
     marginVertical: 50
+  },
+  donateButton: {
+    marginTop: 30
   }
 });
