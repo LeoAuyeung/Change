@@ -24,6 +24,8 @@ const myCharities = [
   {
     id: 3,
     name: "Red Cross",
+    mission:
+      "The American Red Cross prevents and alleviates human suffering in the face of emergencies by mobilizing the power of volunteers and the generosity of donors.",
     icon: require("../assets/images/redcross.jpg"),
     websiteURL: "https://www.redcross.org/donate/donation.html/",
     image:
