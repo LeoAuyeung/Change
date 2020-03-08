@@ -118,7 +118,12 @@ class Settings extends Component {
 
           <ScrollView showsVerticalScrollIndicator={false}>
             <Block style={styles.inputs}>
-              <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
+              <Block
+                row
+                space="between"
+                margin={[10, 0]}
+                style={styles.inputRow}
+              >
                 <Block>
                   <Text gray2 style={{ marginBottom: 10 }}>
                     Username
@@ -133,7 +138,12 @@ class Settings extends Component {
                   {editing === "username" ? "Save" : "Edit"}
                 </Text>
               </Block>
-              <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
+              <Block
+                row
+                space="between"
+                margin={[10, 0]}
+                style={styles.inputRow}
+              >
                 <Block>
                   <Text gray2 style={{ marginBottom: 10 }}>
                     Location
@@ -148,7 +158,12 @@ class Settings extends Component {
                   {editing === "location" ? "Save" : "Edit"}
                 </Text>
               </Block>
-              <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
+              <Block
+                row
+                space="between"
+                margin={[10, 0]}
+                style={styles.inputRow}
+              >
                 <Block>
                   <Text gray2 style={{ marginBottom: 10 }}>
                     E-mail
