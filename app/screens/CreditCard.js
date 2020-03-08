@@ -6,6 +6,9 @@ import {
   CreditCardInput,
   LiteCreditCardInput,
 } from "react-native-credit-card-input";
+import { connect } from "react-redux";
+import { storeCardThunk } from "../store/utilities/creditCard";
+import LottieView from "lottie-react-native";
 
 const s = StyleSheet.create({
   switch: {
@@ -16,6 +19,7 @@ const s = StyleSheet.create({
   container: {
     backgroundColor: "#F5F5F5",
     marginTop: 60,
+    height: "100%"
   },
   label: {
     color: "black",
@@ -23,17 +27,39 @@ const s = StyleSheet.create({
   },
   input: {
     fontSize: 16,
-    color: "black", 
+    color: "black",
   },
+  animationContainer: {
+    width: '100%',
+    height: '50%',
+    alignItems: 'center',
+  }
 });
 
-export default class CreditCard extends Component {
-  state = { useLiteCreditCardInput: false };
+class CreditCard extends Component {
 
-  _onChange = formData =>{
-    // console.log(JSON.stringify(formData, null, " "));
-    console.log(formData)
-  } 
+  state = { 
+    useLiteCreditCardInput: false,
+    complete: true
+  };
+
+  _onChange = form => {
+    console.log(form)
+    if (
+      form["values"]["number"].length === 19 &&
+      form["values"]["postalCode"].length === 5 &&
+      form["status"]["number"] != "invalid" &&
+      form["status"]["cvc"] === "valid" &&
+      form["status"]["expiry"] === "valid" &&
+      form["status"]["name"] === "valid"
+    ) {
+      console.log(form["values"]["number"])
+      this.props.storeCard(form["values"]["number"])
+      this.props.newCard(form["values"]["number"])
+      this.props.hide()
+      this.props.navigation.navigate('Success');
+    }
+  }
   _onFocus = field => console.log("focusing", field);
   _setUseLiteCreditCardInput = useLiteCreditCardInput =>
     this.setState({ useLiteCreditCardInput });
@@ -41,18 +67,11 @@ export default class CreditCard extends Component {
   render() {
     return (
       <View style={s.container}>
-        <Block middle margin={[20]} padding={[theme.sizes.base / 2, 0]}>
-          <Button gradient onPress={() => this.props.hide()}>
-            <Text white center>
-              Go Back
-            </Text>
-          </Button>
-        </Block>
-        <Switch
-          style={s.switch}
-          onValueChange={this._setUseLiteCreditCardInput}
-          value={this.state.useLiteCreditCardInput}
-        />
+          <Switch
+            style={s.switch}
+            onValueChange={this._setUseLiteCreditCardInput}
+            value={this.state.useLiteCreditCardInput}
+          />
 
         {this.state.useLiteCreditCardInput ? (
           <LiteCreditCardInput
@@ -65,22 +84,44 @@ export default class CreditCard extends Component {
             onChange={this._onChange}
           />
         ) : (
-          <CreditCardInput
-            autoFocus
-            requiresName
-            requiresCVC
-            requiresPostalCode
-            cardScale={1.0}
-            labelStyle={s.label}
-            inputStyle={s.input}
-            validColor={"black"}
-            invalidColor={"red"}
-            placeholderColor={"darkgray"}
-            onFocus={this._onFocus}
-            onChange={this._onChange}
-          />
-        )}
+            <CreditCardInput
+              autoFocus
+              requiresName
+              requiresCVC
+              requiresPostalCode
+              cardScale={1.0}
+              labelStyle={s.label}
+              inputStyle={s.input}
+              validColor={"black"}
+              invalidColor={"red"}
+              placeholderColor={"darkgray"}
+              onFocus={this._onFocus}
+              onChange={this._onChange}
+            />
+          )}
+        <Block margin={[50]} padding={[theme.sizes.base / 2, 0]}>
+          <Button gradient onPress={() => this.props.hide()}>
+            <Text white center>
+              Go Back
+            </Text>
+          </Button>
+        </Block> 
       </View>
     );
   }
 }
+
+const mapState = (state) => {
+  return {
+    card: state.creditCard
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    storeCard: (card) => dispatch(storeCardThunk(card))
+  }
+}
+
+
+export default connect(mapState, mapDispatch)(CreditCard);

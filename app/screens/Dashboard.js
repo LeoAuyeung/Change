@@ -18,27 +18,32 @@ import { styles as blockStyles } from "../components/Block";
 import { styles as cardStyles } from "../components/Card";
 import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
-import { StackActions, NavigationActions } from "react-navigation";
-const { width } = Dimensions.get("window");
-
+import { StackActions, NavigationActions } from "react-navigation"
+import { connect } from "react-redux";
+import { getCardThunk } from '../store/utilities/creditCard';
 import transactions from "../mocks/transactions";
 import myCharities from "../mocks/charities";
+const { width } = Dimensions.get("window");
 
-export default class Dashboard extends Component {
+
+class Dashboard extends Component {
   state = {
     showModal: false,
     showCC: false,
     showTransaction: false,
     showDonationOverview: false,
     charities: [],
+    creditCard: "4213 2131 2323 2321",
   };
 
   static navigationOptions = {
     header: null,
   };
-
-  componentDidMount() {
-    this.setState({ showModal: true, charities: myCharities });
+  
+  async componentDidMount() {
+    this.setState({ showModal: true });
+    await this.props.getCard()
+    console.log(this.props.card.substring(15,19))
   }
 
   showModal = () => {
@@ -52,6 +57,12 @@ export default class Dashboard extends Component {
       showCC: false,
     });
   };
+
+  newCreditCard = (number) =>{
+    this.setState({
+      creditCard: number
+    })
+  }
 
   renderDollarCard(navigation) {
     return (
@@ -130,7 +141,7 @@ export default class Dashboard extends Component {
         visible={this.state.showCC}
         onRequestClose={() => this.setState({ showModal: false })}
       >
-        <CreditCard navigation={navigation} hide={this.hideModal} />
+        <CreditCard navigation={navigation} hide={this.hideModal} newCard={this.newCreditCard}/>
       </Modal>
     );
   }
@@ -242,7 +253,7 @@ export default class Dashboard extends Component {
                 Active Credit Card, ending in
               </Text>
               <Text size={20} spacing={0.4} bold white>
-                8864
+                {this.props.card.length > 0 ? this.props.card.substring(15,19) : this.state.creditCard.substring(15,19)}
               </Text>
             </Block>
           </LinearGradient>
@@ -398,6 +409,20 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+const mapState = (state) => {
+	return {
+		card: state.creditCard
+	}
+}
+
+const mapDispatch = (dispatch) => {
+	return {
+		getCard: () => dispatch(getCardThunk())
+	}
+}
+
+export default connect(mapState, mapDispatch)(Dashboard);
 
 Dashboard.defaultProps = {
   profile: mocks.profile,
