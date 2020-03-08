@@ -35,8 +35,6 @@ const MainStack = createStackNavigator(
     Transactions,
     Dashboard,
     Product,
-    Donate,
-    DonateSuccess,
     CreditCard,
     Success
   },
@@ -64,7 +62,7 @@ const MainStack = createStackNavigator(
 );
 
 MainStack.navigationOptions = ({ navigation }) => {
-  let routesToNotShowNavTabs = ["Welcome", "SignUp", "Login", "Forgot", "Success"];
+  let routesToNotShowNavTabs = ["Welcome", "SignUp", "Login", "Forgot", "Success", "DonateSuccess"];
 
   let tabBarVisible;
 
@@ -99,7 +97,9 @@ MainStack.path = "";
 const CharityStack = createStackNavigator(
   {
     Charity,
-    SingleCharity
+    SingleCharity,
+    Donate,
+    DonateSuccess,
   },
   {
     defaultNavigationOptions: {
@@ -124,18 +124,29 @@ const CharityStack = createStackNavigator(
   }
 );
 
-CharityStack.navigationOptions = {
-  tabBarLabel: "Charities",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-heart`
-          : "md-information-circle"
-      }
-    />
-  ),
+CharityStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+
+  let routeName = navigation.state.routes[navigation.state.index].routeName
+
+  if ( routeName == 'DonateSuccess' ) {
+      tabBarVisible = false
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: "Charities",
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={
+          Platform.OS === "ios"
+            ? `ios-heart`
+            : "md-information-circle"
+        }
+      />
+    ),
+  };
 };
 
 CharityStack.path = "";

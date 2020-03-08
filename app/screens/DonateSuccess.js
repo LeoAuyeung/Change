@@ -19,8 +19,15 @@ export default class DonateSuccess extends Component {
     value: "0",
   };
 
+  static navigationOptions = {
+    header: null,
+  };
+
   componentDidMount() {
     this.animation.play();
+    setTimeout(() => {
+      this.props.navigation.pop(2);
+    }, 3000);
     // Or set a specific startFrame and endFrame with:
     // this.animation.play(30, 120);
   }
@@ -29,7 +36,6 @@ export default class DonateSuccess extends Component {
     this.animation.reset();
     // this.animation.play();
   };
-
 
   handleReturn() {
     const { navigation } = this.props;
@@ -56,44 +62,33 @@ export default class DonateSuccess extends Component {
     return (
       <KeyboardAvoidingView style={styles.login} behavior="padding">
         <Block padding={[0, theme.sizes.base * 2], 50}>
-          <Text h1 bold center>
-            Success!
-          </Text>
           <View style={styles.animationContainer}>
+            <Text h1 bold center>
+              Success!
+          </Text>
             <LottieView
-            ref={animation => {
+              ref={animation => {
                 this.animation = animation;
-            }}
-            style={{
+              }}
+              style={{
                 width: 300,
                 height: 300,
                 backgroundColor: '#fff',
-            }}
-            source={require('../assets/lottie/checkAnimation.json')}
-            loop={false}
+              }}
+              source={require('../assets/lottie/checkAnimation.json')}
+              loop={false}
             // OR find more Lottie files @ https://lottiefiles.com/featured
             // Just click the one you like, place that file in the 'assets' folder to the left, and replace the above 'require' statement
             />
-            </View>
             <Text h1 bold center
-                style={{
-                    marginTop: 50,
-                    marginBottom: 10
-                }} 
+              style={{
+                marginTop: 50,
+                marginBottom: 10
+              }}
             >
-                You just donated $50.00 to the American Red Cross!
+              You just donated ${this.props.navigation.state.params.donationAmount} to {this.props.navigation.state.params.charity}!
             </Text>
-          <Block middle>
-            <Button gradient onPress={() => this.handleReturn()}>
-              {loading ? (
-                <ActivityIndicator size="small" color="white" />
-              ) : (
-                <Text bold white center>
-                  Return to home
-                </Text>
-              )}
-            </Button>
-          </Block>
+          </View>
         </Block>
       </KeyboardAvoidingView>
     );
@@ -115,8 +110,9 @@ const styles = StyleSheet.create({
     borderBottomColor: theme.colors.accent
   },
   animationContainer: {
-      width: '100%',
-      height: '50%',
-      alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: "center"
   }
 });

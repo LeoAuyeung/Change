@@ -57,7 +57,6 @@ class SingleCharity extends Component {
     const { navigation } = this.props;
     let { charity, charityImage, resizeMode } = navigation.state.params;
     if (charity.image) {
-      charity["image"] = charity.image
       charityImage = {
         uri: charity.image
       };
@@ -141,8 +140,10 @@ class SingleCharity extends Component {
 
             <Button
               onPress={() =>
+                
                 navigation.navigate("Donate", {
-                  charity
+                  charity,
+                  charityImage: charityImage
                 })
               }
               gradient
