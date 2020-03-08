@@ -145,15 +145,6 @@ const styles = StyleSheet.create({
   firstCharity: {
     marginTop: 16
   },
-  images: {
-    width: "100%"
-  },
-  category: {
-    // this should be dynamic based on screen width
-    minWidth: width - theme.sizes.padding * 2.4 - theme.sizes.base,
-    maxWidth: width - theme.sizes.padding * 2.4 - theme.sizes.base,
-    maxHeight: (width - theme.sizes.padding * 2.4 - theme.sizes.base) / 2
-  },
   coverContainer: {
     width: "100%",
     height: 200,
