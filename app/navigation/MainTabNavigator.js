@@ -11,8 +11,6 @@ import SignUp from "../screens/SignUp";
 import Transactions from '../screens/Transactions';
 import Dashboard from "../screens/Dashboard";
 import Forgot from "../screens/Forgot";
-import Explore from "../screens/Explore";
-import Browse from "../screens/Browse";
 import Product from "../screens/Product";
 import Settings from "../screens/Settings";
 import Donate from "../screens/Donate";
@@ -34,11 +32,8 @@ const MainStack = createStackNavigator(
     SignUp,
     Forgot,
     Transactions,
-    Explore,
     Dashboard,
-    Browse,
     Product,
-    Settings,
     Donate,
     DonateSuccess
   },
@@ -82,7 +77,7 @@ MainStack.navigationOptions = ({ navigation }) => {
 
   return {
     tabBarVisible,
-    tabBarLabel: "Main",
+    tabBarLabel: "Home",
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
         focused={focused}
@@ -142,7 +137,7 @@ CharityStack.navigationOptions = {
 
 CharityStack.path = "";
 
-const NewsStack = createStackNavigator(
+const SettingsStack = createStackNavigator(
   {
     Settings,
   },
@@ -169,27 +164,31 @@ const NewsStack = createStackNavigator(
   }
 );
 
-NewsStack.navigationOptions = {
-  tabBarLabel: "News",
+SettingsStack.navigationOptions = {
+  tabBarLabel: "Settings",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
+          ? `ios-settings`
+          : "md-settings"
       }
     />
   ),
 };
 
-NewsStack.path = "";
+SettingsStack.path = "";
 
-const tabNavigator = createBottomTabNavigator({
-  MainStack,
-  CharityStack,
-  NewsStack,
-});
+const tabNavigator = createBottomTabNavigator(
+  {
+    MainStack,
+    CharityStack,
+    SettingsStack,
+  },
+  {
+  }
+);
 
 tabNavigator.path = "";
 

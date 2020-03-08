@@ -17,6 +17,7 @@ import { styles as blockStyles } from "../components/Block";
 import { styles as cardStyles } from "../components/Card";
 import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
+import { StackActions, NavigationActions } from "react-navigation"
 
 const { width } = Dimensions.get("window");
 
@@ -32,6 +33,7 @@ export default class Dashboard extends Component {
     header: null,
   };
 
+  
   componentDidMount() {
     this.setState({ showModal: true });
   }
@@ -40,12 +42,12 @@ export default class Dashboard extends Component {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={() => navigation.navigate("Settings")}
+        onPress={() => navigation.navigate('SettingsStack', {}, NavigationActions.navigate({ routeName: 'Settings' }))}
       >
         <Card shadow style={{ padding: 20 }}>
           <Image
             resizeMode="contain"
-            source={require("../assets/images/More.png")}
+            source={require("../assets/icons/settings-outline.png")}
             style={styles.moreIcon}
           />
           <Block>
@@ -280,8 +282,11 @@ export default class Dashboard extends Component {
             <Text style={{ color: theme.colors.caption }}>Welcome Back,</Text>
             <Text style={{ fontSize: theme.sizes.font * 2 }}>Miguel</Text>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
-            <Image style={styles.avatar} source={profile.avatar} />
+          <TouchableOpacity onPress={() => navigation.navigate('SettingsStack', {}, NavigationActions.navigate({ routeName: 'Settings' }))}>
+            <Image
+              style={styles.avatar}
+              source={profile.avatar}
+            />
           </TouchableOpacity>
         </View>
         <Block horizontal>{this.renderDollarCard(navigation)}</Block>
@@ -326,10 +331,10 @@ export default class Dashboard extends Component {
           </Text>
           <Block>
             <Block style={{ paddingTop: 10 }}>
-              {transactions.map(t => {
+              {transactions.map((t,i) => {
                 return (
                   <TouchableOpacity onPress={() => navigation.navigate("Transactions", { t })} activeOpacity={0.7}>
-                    <Card shadow key={`transaction-${t.id}`}>
+                    <Card shadow key={i}>
                       <Block
                         style={{ marginBottom: theme.sizes.base }}
                       >
