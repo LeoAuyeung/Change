@@ -27,8 +27,7 @@ export default CharityReducer = (state = [], action) => {
     case GET_CHARITY:
       return state;
     case STORE_CHARITY:
-      state.push(action.payload);
-      return state;
+      return [...state, action.payload];
     default:
       return state;
   }

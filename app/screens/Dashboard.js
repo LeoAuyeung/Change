@@ -46,9 +46,12 @@ class Dashboard extends Component {
   };
 
   async componentDidMount() {
-    await this.props.storeCharity(myCharities);
+    await this.props.storeCharity(myCharities[0]);
+    await this.props.storeCharity(myCharities[1]);
+    await this.props.storeCharity(myCharities[2]);
     await this.props.getCard();
     await this.props.getCharity();
+    console.log(this.props.charities)
     this.setState({ showModal: true });
     await this.props.getCard();
     console.log(this.props.card.substring(15, 19));
@@ -229,11 +232,11 @@ class Dashboard extends Component {
             primary
             height={22}
           >
-            {charity.name}
+            {charity.charityName}
           </Text>
 
           <Text transform="capitalize" spacing={0.7}>
-            {charity.description}
+            {charity.description ? charity.description : charity.mission.substring(0,10) + "..."}
           </Text>
         </Card>
       </TouchableOpacity>
@@ -312,7 +315,14 @@ class Dashboard extends Component {
             <Text spacing={0.7} transform="uppercase" style={{ marginTop: 10 }}>
               Your Charities
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Browse")}>
+            <TouchableOpacity 
+            onPress={() =>
+              navigation.navigate(
+                "CharityStack",
+                {},
+                NavigationActions.navigate({ routeName: "Charities" })
+              )
+            }>
               <Text style={{ fontSize: 30, marginBottom: 5, marginRight: 5 }}>
                 +
               </Text>
@@ -327,7 +337,7 @@ class Dashboard extends Component {
               decelerationRate={0}
               scrollEventThrottle={16}
               style={{ overflow: "visible" }}
-              data={myCharities}
+              data={this.props.charities}
               keyExtractor={(item, index) => `${item.id}`}
               renderItem={({ item }) => this.renderCharities(item, navigation)}
             />
