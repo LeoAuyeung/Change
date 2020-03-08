@@ -62,7 +62,7 @@ export default class Donate extends Component {
       <DismissKeyboard>
         <KeyboardAvoidingView style={styles.login} behavior="padding">
           <Block padding={[50, theme.sizes.base * 2]}>
-            <Block style={styles.header}>
+            <Block>
               <Block>
                 <Text h1 bold>
                   Donate directly
@@ -71,12 +71,9 @@ export default class Donate extends Component {
                   {charity.charityName}
                 </Text>
               </Block>
-              <Image
-                source={charityImage}
-                style={[styles.charityLogo]}
-              />
+              <Image source={charityImage} style={[styles.charityLogo]} />
             </Block>
-            <Block style={{padding: 10}}>
+            <Block style={{ padding: 10 }}>
               <Text h3>Amount (USD)</Text>
               <NumericInput
                 type="currency"
@@ -142,7 +139,8 @@ const styles = StyleSheet.create({
   charityLogo: {
     width: "100%",
     height: 200,
-    marginVertical: 50
+    resizeMode: "contain",
+    marginVertical: 100
   },
   donateButton: {
     marginTop: 30
