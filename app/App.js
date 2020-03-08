@@ -1,6 +1,7 @@
 import React from "react";
 import { Platform, StatusBar, StyleSheet, View, TouchableWithoutFeedback, Keyboard } from "react-native";
-
+import { Provider } from "react-redux";
+import store from './store';
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 
@@ -45,10 +46,12 @@ export default class App extends React.Component {
     }
 
     return (
-      <View style={styles.container}>
-        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-        <AppNavigator />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+          <AppNavigator />
+        </View>
+      </Provider>
     );
   }
 }

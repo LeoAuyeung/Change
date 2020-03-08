@@ -85,7 +85,7 @@ MainStack.navigationOptions = ({ navigation }) => {
         focused={focused}
         name={
           Platform.OS === "ios"
-            ? `ios-information-circle${focused ? "" : "-outline"}`
+            ? `ios-home`
             : "md-information-circle"
         }
       />
@@ -124,13 +124,13 @@ const CharityStack = createStackNavigator(
 );
 
 CharityStack.navigationOptions = {
-  tabBarLabel: "Charity",
+  tabBarLabel: "Charities",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
+          ? `ios-heart`
           : "md-information-circle"
       }
     />
