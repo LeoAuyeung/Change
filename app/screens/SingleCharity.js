@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
   TouchableOpacity,
   Alert,
+  Linking,
   Dimensions,
   StyleSheet,
   ScrollView,
@@ -24,21 +25,19 @@ class SingleCharity extends Component {
   }
 
   async componentDidMount() {
-    this._isMounted = true;
-    try {
-      // let { data } = await axios.get(`https://api.data.charitynavigator.org/v2/Organizations?app_id=3f8b1f09&app_key=156d538582406ecb12adc790348065e7&categoryID=4&state=NY`)
-      // if (this._isMounted) {
-      // 	this.setState({
-      // 		charities: data.slice(0, 15)
-      // 	})
-      // }
-    } catch (err) {
-      console.log(err);
-    }
+    Linking.getInitialURL()
+      .then(url => {
+        if (url) {
+          this.handleOpenURL(url);
+        }
+      })
+      .catch(err => {});
+    Linking.addEventListener("url", this.handleOpenURL);
   }
 
   componentWillUnmount() {
     this._isMounted = false;
+    Linking.removeEventListener("url", this.handleOpenURL);
   }
 
   render() {
@@ -70,6 +69,17 @@ class SingleCharity extends Component {
         </View>
         <View style={{}}>
           <Block horizontal>
+            <Button gradient>
+              <Text
+                white
+                center
+                onPress={async () => {
+                  Linking.openURL(charity.websiteURL);
+                }}
+              >
+                Learn More
+              </Text>
+            </Button>
             <Button
               gradient
               onPress={async () => {

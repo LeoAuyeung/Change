@@ -7,11 +7,13 @@ const myCharities = [
     icon: require("../assets/images/teamtrees.jpg"),
     image:
       "https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/72634507_1430880343747588_3676343023645376761_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=104&_nc_ohc=Gg21Cxj1KRMAX_A4qua&oh=35579bce4e0b02b01993f5e1c917ea55&oe=5E8E6F5E",
+    websiteURL: "https://teamtrees.org/",
     description: "Championed by Mr B...",
   },
   {
     id: 2,
     name: "Direct Relief",
+    websiteURL: "https://www.directrelief.org/",
     mission:
       "Direct Relief is a humanitarian aid organization, active in all 50 states and more than 80 countries, with a mission to improve the health and lives of people affected by poverty or emergencies – without regard to politics, religion, or ability to pay.\n",
     icon: require("../assets/images/corona.png"),
@@ -23,6 +25,7 @@ const myCharities = [
     id: 3,
     name: "Red Cross",
     icon: require("../assets/images/redcross.jpg"),
+    websiteURL: "https://www.redcross.org/donate/donation.html/",
     image:
       "https://www.redcross.org/content/dam/redcross/uncategorized/12/Vol-Banner-volunteer-looking-at-fire-1534x1198.jpg.transform/768/q70/feature/image.jpeg",
     description: "Hospitals around the worl...",

@@ -116,9 +116,9 @@ export default class Transactions extends Component {
           <Block color="gray3" style={styles.hLine} />
 
           <Block row center space="between">
-            <Text></Text>
+            <Text>Going to charity</Text>
             <Text size={20} spacing={1} primary>
-              $6.71
+              $0.60
             </Text>
           </Block>
         </Card>
