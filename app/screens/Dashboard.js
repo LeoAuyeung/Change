@@ -420,11 +420,6 @@ class Dashboard extends Component {
                   </TouchableOpacity>
                 );
               })}
-              <Button gradient>
-                <Text white center>
-                  See More
-                </Text>
-              </Button>
             </Block>
           </Block>
         </ScrollView>
