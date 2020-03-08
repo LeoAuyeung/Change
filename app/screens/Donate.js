@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
   ActivityIndicator,
+  Image,
   Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
@@ -51,11 +52,21 @@ export default class Donate extends Component {
       <DismissKeyboard>
         <KeyboardAvoidingView style={styles.login} behavior="padding">
           <Block padding={[50, theme.sizes.base * 2]}>
-            <Text h1 bold>
-              Donate directly
-            </Text>
-            <Text h3>Charity: American Red Cross</Text>
-            <Block marginTop={200}>
+            <Block style={styles.header}>
+              <Block>
+                <Text h1 bold>
+                  Donate directly
+                </Text>
+                <Text h3 style={styles.charityName}>
+                  Charity: American Red Cross
+                </Text>
+              </Block>
+              <Image
+                source={require("../assets/images/redcross.jpg")}
+                style={[styles.charityLogo]}
+              />
+            </Block>
+            <Block>
               <Text h3>Amount (USD)</Text>
               <NumericInput
                 type="currency"
@@ -64,8 +75,11 @@ export default class Donate extends Component {
                 currency="USD"
                 locale="en-US"
                 onUpdate={value => this.setState({ value: value })}
-                // style={styles.label}
+                style={styles.label}
               />
+              <Text caption styles={styles.minimumDonation}>
+                There is a minimum donation of $1.
+              </Text>
               <Button gradient onPress={() => this.handleDonate()}>
                 {loading ? (
                   <ActivityIndicator size="small" color="white" />
@@ -84,6 +98,9 @@ export default class Donate extends Component {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row"
+  },
   login: {
     flex: 1,
     justifyContent: "center"
@@ -96,5 +113,21 @@ const styles = StyleSheet.create({
   },
   hasErrors: {
     borderBottomColor: theme.colors.accent
+  },
+  label: {
+    borderColor: "black",
+    borderWidth: 1,
+    paddingLeft: 10,
+    marginVertical: 10
+  },
+  minimumDonation: {
+    marginBottom: 25
+  },
+  charityName: {
+    marginTop: 10
+  },
+  charityLogo: {
+    height: 72,
+    width: 72
   }
 });
