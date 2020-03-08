@@ -4,23 +4,8 @@ import { Block, Badge, Card, Text, Progress } from "../components";
 import { theme, mocks } from "../constants";
 
 export default class Transactions extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: (
-        <Text style={[theme.fonts.header, { paddingLeft: theme.sizes.base }]}>
-          Transaction
-        </Text>
-      ),
-      headerLeft: (
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image
-            resizeMode="contain"
-            source={require("../assets/images/Back.png")}
-            style={{ width: 20, height: 24, marginRight: theme.sizes.base }}
-          />
-        </TouchableOpacity>
-      ),
-    };
+  static navigationOptions = {
+    title: "Transaction"
   };
 
   render() {

@@ -46,7 +46,7 @@ const MainStack = createStackNavigator(
         borderBottomColor: "transparent",
         elevation: 0 // for android
       },
-      headerBackImage: <Image source={require("../assets/icons/back.png")} />,
+      headerBackImage: <Image source={require("../assets/icons/back2xn.png")} />,
       headerBackTitle: null,
       headerLeftContainerStyle: {
         alignItems: "center",
@@ -109,7 +109,7 @@ const CharityStack = createStackNavigator(
         borderBottomColor: "transparent",
         elevation: 0 // for android
       },
-      headerBackImage: <Image source={require("../assets/icons/back.png")} />,
+      headerBackImage: <Image source={require("../assets/icons/back2xn.png")} />,
       headerBackTitle: null,
       headerLeftContainerStyle: {
         alignItems: "center",
@@ -163,7 +163,7 @@ const SettingsStack = createStackNavigator(
         borderBottomColor: "transparent",
         elevation: 0 // for android
       },
-      headerBackImage: <Image source={require("../assets/icons/back.png")} />,
+      headerBackImage: <Image source={require("../assets/icons/back2xn.png")} />,
       headerBackTitle: null,
       headerLeftContainerStyle: {
         alignItems: "center",
