@@ -5,7 +5,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  View
 } from "react-native";
 
 import { Button, Block, Input, Text } from "../components";
@@ -39,7 +40,10 @@ export default class Donate extends Component {
     this.setState({ errors, loading: false });
 
     if (!errors.length) {
-      navigation.navigate("DonateSuccess", {charity: charityName, donationAmount: this.state.value});
+      navigation.navigate("DonateSuccess", {
+        charity: charityName,
+        donationAmount: this.state.value
+      });
     }
   }
 
@@ -58,20 +62,19 @@ export default class Donate extends Component {
       <DismissKeyboard>
         <KeyboardAvoidingView style={styles.login} behavior="padding">
           <Block padding={[50, theme.sizes.base * 2]}>
-            <Block style={styles.header}>
-              <Block>
-                <Text h1 bold>
-                  Donate directly
-                </Text>
-                <Text h3 style={styles.charityName}>
-                  {charity.charityName}
-                </Text>
-              </Block>
-              <Image
-                source={charityImage}
-                style={[styles.charityLogo]}
-              />
-            </Block>
+            <View>
+              <Text h1 bold>
+                Donate directly
+              </Text>
+              <Text h3 style={styles.charityName}>
+                {charity.charityName}
+              </Text>
+            </View>
+            <Image
+              source={charityImage}
+              style={[styles.charityLogo]}
+              resizeMode="contain"
+            />
             <Block>
               <Text h3>Amount (USD)</Text>
               <NumericInput
@@ -86,7 +89,10 @@ export default class Donate extends Component {
               <Text caption styles={styles.minimumDonation} on>
                 There is a minimum donation of $1.
               </Text>
-              <Button gradient onPress={() => this.handleDonate(charity.charityName)}>
+              <Button
+                gradient
+                onPress={() => this.handleDonate(charity.charityName)}
+              >
                 {loading ? (
                   <ActivityIndicator size="small" color="white" />
                 ) : (
@@ -104,9 +110,6 @@ export default class Donate extends Component {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row"
-  },
   login: {
     flex: 1,
     justifyContent: "center"
@@ -133,7 +136,8 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   charityLogo: {
-    height: 72,
-    width: 72
+    width: "100%",
+    height: 200,
+    marginVertical: 50
   }
 });
