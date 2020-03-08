@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { AsyncStorage } from "react-native";
 import CreditCard from "./CreditCard";
 import * as Icon from "react-native-vector-icons";
-import { connect } from 'react-redux';
-import { storeCardThunk } from '../store/utilities/creditCard';
+import { connect } from "react-redux";
+import { storeCardThunk } from "../store/utilities/creditCard";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Dimensions,
@@ -21,12 +21,11 @@ import { styles as cardStyles } from "../components/Card";
 import { Badge, Card, Button, Block, Text } from "../components";
 import { theme, mocks } from "../constants";
 import { StackActions, NavigationActions } from "react-navigation";
+import { connect } from "react-redux";
+import { getCardThunk } from "../store/utilities/creditCard";
 const { width } = Dimensions.get("window");
 
-import transactions from "../mocks/transactions";
-import myCharities from "../mocks/charities";
-
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   state = {
     showModal: false,
     showCC: false,
@@ -39,8 +38,10 @@ export default class Dashboard extends Component {
     header: null,
   };
 
-  componentDidMount() {
-    this.setState({ showModal: true, charities: myCharities });
+  async componentDidMount() {
+    this.setState({ showModal: true });
+    await this.props.getCard();
+    console.log(this.props.card);
   }
 
   showModal = () => {
@@ -400,6 +401,20 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+const mapState = state => {
+  return {
+    card: state.creditCard,
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    getCard: () => dispatch(getCardThunk()),
+  };
+};
+
+export default connect(mapState, mapDispatch)(Dashboard);
 
 Dashboard.defaultProps = {
   profile: mocks.profile,

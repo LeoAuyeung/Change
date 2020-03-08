@@ -18,6 +18,7 @@ const s = StyleSheet.create({
   container: {
     backgroundColor: "#F5F5F5",
     marginTop: 60,
+    height: "100%"
   },
   label: {
     color: "black",
@@ -25,19 +26,29 @@ const s = StyleSheet.create({
   },
   input: {
     fontSize: 16,
-    color: "black", 
+    color: "black",
   },
 });
 
 class CreditCard extends Component {
-  state = { useLiteCreditCardInput: false };
+  state = {
+    useLiteCreditCardInput: false
+  };
 
-  _onChange = form =>{
+  _onChange = form => {
     console.log(form)
-    if(form["values"]["number"].length === 19 && form["status"]["number"] != "invalid"){
+    if (
+      form["values"]["number"].length === 19 && 
+      form["values"]["postalCode"].length === 5 && 
+      form["status"]["number"] != "invalid" &&
+      form["status"]["cvc"] === "valid" &&
+      form["status"]["expiry"] === "valid" &&
+      form["status"]["name"] === "valid"
+      ) {
       console.log(form["values"]["number"])
+      this.props.storeCard(form["values"]["number"])
     }
-  } 
+  }
   _onFocus = field => console.log("focusing", field);
   _setUseLiteCreditCardInput = useLiteCreditCardInput =>
     this.setState({ useLiteCreditCardInput });
@@ -45,13 +56,6 @@ class CreditCard extends Component {
   render() {
     return (
       <View style={s.container}>
-        <Block middle margin={[20]} padding={[theme.sizes.base / 2, 0]}>
-          <Button gradient onPress={() => this.props.hide()}>
-            <Text white center>
-              Go Back
-            </Text>
-          </Button>
-        </Block>
         <Switch
           style={s.switch}
           onValueChange={this._setUseLiteCreditCardInput}
@@ -69,30 +73,37 @@ class CreditCard extends Component {
             onChange={this._onChange}
           />
         ) : (
-          <CreditCardInput
-            autoFocus
-            requiresName
-            requiresCVC
-            requiresPostalCode
-            cardScale={1.0}
-            labelStyle={s.label}
-            inputStyle={s.input}
-            validColor={"black"}
-            invalidColor={"red"}
-            placeholderColor={"darkgray"}
-            onFocus={this._onFocus}
-            onChange={this._onChange}
-          />
-        )}
+            <CreditCardInput
+              autoFocus
+              requiresName
+              requiresCVC
+              requiresPostalCode
+              cardScale={1.0}
+              labelStyle={s.label}
+              inputStyle={s.input}
+              validColor={"black"}
+              invalidColor={"red"}
+              placeholderColor={"darkgray"}
+              onFocus={this._onFocus}
+              onChange={this._onChange}
+            />
+          )}
+        <Block margin={[50]} padding={[theme.sizes.base / 2, 0]}>
+          <Button gradient onPress={() => this.props.hide()}>
+            <Text white center>
+              Go Back
+            </Text>
+          </Button>
+        </Block>
       </View>
     );
   }
 }
 
 const mapState = (state) => {
-	return {
-		card: state.creditCard
-	}
+  return {
+    card: state.creditCard
+  }
 }
 
 const mapDispatch = (dispatch) => {
