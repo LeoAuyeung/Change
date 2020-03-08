@@ -5,7 +5,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  View
 } from "react-native";
 
 import { Button, Block, Input, Text } from "../components";
@@ -39,7 +40,10 @@ export default class Donate extends Component {
     this.setState({ errors, loading: false });
 
     if (!errors.length) {
-      navigation.navigate("DonateSuccess", {charity: charityName, donationAmount: this.state.value});
+      navigation.navigate("DonateSuccess", {
+        charity: charityName,
+        donationAmount: this.state.value
+      });
     }
   }
 
@@ -83,10 +87,14 @@ export default class Donate extends Component {
                 onUpdate={value => this.setState({ value: value })}
                 style={styles.label}
               />
-              <Text caption styles={styles.minimumDonation} on>
+              <Text size={20} styles={styles.minimumDonation} on>
                 There is a minimum donation of $1.
               </Text>
-              <Button gradient onPress={() => this.handleDonate(charity.charityName)}>
+              <Button
+                style={styles.donateButton}
+                gradient
+                onPress={() => this.handleDonate(charity.charityName)}
+              >
                 {loading ? (
                   <ActivityIndicator size="small" color="white" />
                 ) : (
@@ -104,9 +112,6 @@ export default class Donate extends Component {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row"
-  },
   login: {
     flex: 1,
     justifyContent: "center"
@@ -123,8 +128,10 @@ const styles = StyleSheet.create({
   label: {
     borderColor: "black",
     borderWidth: 1,
-    paddingLeft: 10,
-    marginVertical: 10
+    padding: 7,
+    marginVertical: 15,
+    maxWidth: "50%",
+    fontSize: 40
   },
   minimumDonation: {
     marginBottom: 25
@@ -133,7 +140,11 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   charityLogo: {
-    height: 72,
-    width: 72
+    width: "100%",
+    height: 200,
+    marginVertical: 50
+  },
+  donateButton: {
+    marginTop: 30
   }
 });
