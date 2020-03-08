@@ -27,7 +27,7 @@ export default class DonateSuccess extends Component {
     this.animation.play();
     setTimeout(() => {
       this.props.navigation.pop(2);
-    }, 3000);
+    }, 3500);
     // Or set a specific startFrame and endFrame with:
     // this.animation.play(30, 120);
   }
@@ -61,11 +61,11 @@ export default class DonateSuccess extends Component {
 
     return (
       <KeyboardAvoidingView style={styles.login} behavior="padding">
-        <Block padding={[0, theme.sizes.base * 2], 50}>
+        <Block style={styles.block} padding={[0, theme.sizes.base * 2], 50}>
           <View style={styles.animationContainer}>
             <Text h1 bold center>
               Success!
-          </Text>
+            </Text>
             <LottieView
               ref={animation => {
                 this.animation = animation;
@@ -77,8 +77,6 @@ export default class DonateSuccess extends Component {
               }}
               source={require('../assets/lottie/checkAnimation.json')}
               loop={false}
-            // OR find more Lottie files @ https://lottiefiles.com/featured
-            // Just click the one you like, place that file in the 'assets' folder to the left, and replace the above 'require' statement
             />
             <Text h1 bold center
               style={{
@@ -88,6 +86,11 @@ export default class DonateSuccess extends Component {
             >
               You just donated ${this.props.navigation.state.params.donationAmount} to {this.props.navigation.state.params.charity}!
             </Text>
+            <Button gradient onPress={() => this.props.navigation.pop(2)}>
+              <Text white center>
+                Cancel
+            </Text>
+            </Button>
           </View>
         </Block>
       </KeyboardAvoidingView>
@@ -99,6 +102,10 @@ const styles = StyleSheet.create({
   login: {
     flex: 1,
     justifyContent: "center"
+  },
+  block: {
+    flex: 1,
+    justifyContent: "center",
   },
   input: {
     borderRadius: 0,
@@ -112,7 +119,6 @@ const styles = StyleSheet.create({
   animationContainer: {
     width: '100%',
     height: '100%',
-    alignItems: 'center',
-    justifyContent: "center"
+    justifyContent: "space-evenly",
   }
 });
