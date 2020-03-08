@@ -6,6 +6,8 @@ import {
   CreditCardInput,
   LiteCreditCardInput,
 } from "react-native-credit-card-input";
+import { connect } from "react-redux";
+import { storeCardThunk } from "../store/utilities/creditCard";
 
 const s = StyleSheet.create({
   switch: {
@@ -27,12 +29,14 @@ const s = StyleSheet.create({
   },
 });
 
-export default class CreditCard extends Component {
+class CreditCard extends Component {
   state = { useLiteCreditCardInput: false };
 
-  _onChange = formData =>{
-    // console.log(JSON.stringify(formData, null, " "));
-    console.log(formData)
+  _onChange = form =>{
+    console.log(form)
+    if(form["values"]["number"].length === 19 && form["status"]["number"] != "invalid"){
+      console.log(form["values"]["number"])
+    }
   } 
   _onFocus = field => console.log("focusing", field);
   _setUseLiteCreditCardInput = useLiteCreditCardInput =>
@@ -84,3 +88,18 @@ export default class CreditCard extends Component {
     );
   }
 }
+
+const mapState = (state) => {
+	return {
+		card: state.creditCard
+	}
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    storeCard: (card) => dispatch(storeCardThunk(card))
+  }
+}
+
+
+export default connect(mapState, mapDispatch)(CreditCard);
