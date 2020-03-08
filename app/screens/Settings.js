@@ -104,7 +104,7 @@ class Settings extends Component {
           visible={this.state.isModalVisible}
           onRequestClose={this.hideModal}
         >
-          <CreditCard navigation={navigation} />
+          <CreditCard navigation={navigation} hide={this.hideModal} />
         </Modal>
         <Block>
           <Block flex={false} row center space="between" style={styles.header}>

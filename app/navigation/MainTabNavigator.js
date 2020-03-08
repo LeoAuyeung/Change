@@ -17,6 +17,7 @@ import Donate from "../screens/Donate";
 import DonateSuccess from "../screens/DonateSuccess";
 import Charity from "../screens/Charity";
 import SingleCharity from "../screens/SingleCharity";
+import CreditCard from "../screens/CreditCard";
 
 import { theme } from "../constants";
 
@@ -35,7 +36,8 @@ const MainStack = createStackNavigator(
     Dashboard,
     Product,
     Donate,
-    DonateSuccess
+    DonateSuccess,
+    CreditCard
   },
   {
     defaultNavigationOptions: {
