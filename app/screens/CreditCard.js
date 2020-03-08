@@ -8,6 +8,7 @@ import {
 } from "react-native-credit-card-input";
 import { connect } from "react-redux";
 import { storeCardThunk } from "../store/utilities/creditCard";
+import LottieView from "lottie-react-native";
 
 const s = StyleSheet.create({
   switch: {
@@ -18,7 +19,7 @@ const s = StyleSheet.create({
   container: {
     backgroundColor: "#F5F5F5",
     marginTop: 60,
-    height: "100%"
+    height: "100%",
   },
   label: {
     color: "black",
@@ -28,27 +29,36 @@ const s = StyleSheet.create({
     fontSize: 16,
     color: "black",
   },
+  animationContainer: {
+    width: "100%",
+    height: "50%",
+    alignItems: "center",
+  },
 });
 
 class CreditCard extends Component {
   state = {
-    useLiteCreditCardInput: false
+    useLiteCreditCardInput: false,
+    complete: true,
   };
 
   _onChange = form => {
-    console.log(form)
+    console.log(form);
     if (
-      form["values"]["number"].length === 19 && 
-      form["values"]["postalCode"].length === 5 && 
+      form["values"]["number"].length === 19 &&
+      form["values"]["postalCode"].length === 5 &&
       form["status"]["number"] != "invalid" &&
       form["status"]["cvc"] === "valid" &&
       form["status"]["expiry"] === "valid" &&
       form["status"]["name"] === "valid"
-      ) {
-      console.log(form["values"]["number"])
-      this.props.storeCard(form["values"]["number"])
+    ) {
+      console.log(form["values"]["number"]);
+      this.props.storeCard(form["values"]["number"]);
+      this.props.newCard(form["values"]["number"]);
+      this.props.hide();
+      this.props.navigation.navigate("Success");
     }
-  }
+  };
   _onFocus = field => console.log("focusing", field);
   _setUseLiteCreditCardInput = useLiteCreditCardInput =>
     this.setState({ useLiteCreditCardInput });
@@ -73,25 +83,25 @@ class CreditCard extends Component {
             onChange={this._onChange}
           />
         ) : (
-            <CreditCardInput
-              autoFocus
-              requiresName
-              requiresCVC
-              requiresPostalCode
-              cardScale={1.0}
-              labelStyle={s.label}
-              inputStyle={s.input}
-              validColor={"black"}
-              invalidColor={"red"}
-              placeholderColor={"darkgray"}
-              onFocus={this._onFocus}
-              onChange={this._onChange}
-            />
-          )}
+          <CreditCardInput
+            autoFocus
+            requiresName
+            requiresCVC
+            requiresPostalCode
+            cardScale={1.0}
+            labelStyle={s.label}
+            inputStyle={s.input}
+            validColor={"black"}
+            invalidColor={"red"}
+            placeholderColor={"darkgray"}
+            onFocus={this._onFocus}
+            onChange={this._onChange}
+          />
+        )}
         <Block margin={[50]} padding={[theme.sizes.base / 2, 0]}>
           <Button gradient onPress={() => this.props.hide()}>
             <Text white center>
-              Go Back{this.props.card}
+              Go Back
             </Text>
           </Button>
         </Block>
@@ -100,17 +110,16 @@ class CreditCard extends Component {
   }
 }
 
-const mapState = (state) => {
+const mapState = state => {
   return {
-    card: state.creditCard
-  }
-}
+    card: state.creditCard,
+  };
+};
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = dispatch => {
   return {
-    storeCard: (card) => dispatch(storeCardThunk(card))
-  }
-}
-
+    storeCard: card => dispatch(storeCardThunk(card)),
+  };
+};
 
 export default connect(mapState, mapDispatch)(CreditCard);

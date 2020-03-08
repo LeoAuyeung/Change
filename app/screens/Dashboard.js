@@ -41,11 +41,12 @@ class Dashboard extends Component {
   };
 
   async componentDidMount() {
-    this.props.storeCharity(myCharities);
-    this.props.getCard();
-    this.props.getCharity();
+    await this.props.storeCharity(myCharities);
+    await this.props.getCard();
+    await this.props.getCharity();
     this.setState({showModal: true });
-    console.log("helloooo: ",this.props)
+    await this.props.getCard()
+    console.log(this.props.card.substring(15,19))
   }
 
   showModal = () => {
@@ -59,6 +60,12 @@ class Dashboard extends Component {
       showCC: false,
     });
   };
+
+  newCreditCard = (number) =>{
+    this.setState({
+      creditCard: number
+    })
+  }
 
   renderDollarCard(navigation) {
     return (
@@ -137,7 +144,7 @@ class Dashboard extends Component {
         visible={this.state.showCC}
         onRequestClose={() => this.setState({ showModal: false })}
       >
-        <CreditCard navigation={navigation} hide={this.hideModal} />
+        <CreditCard navigation={navigation} hide={this.hideModal} newCard={this.newCreditCard}/>
       </Modal>
     );
   }
@@ -249,7 +256,7 @@ class Dashboard extends Component {
                 Active Credit Card, ending in
               </Text>
               <Text size={20} spacing={0.4} bold white>
-                8864
+                {this.props.card.length > 0 ? this.props.card.substring(15,19) : this.state.creditCard.substring(15,19)}
               </Text>
             </Block>
           </LinearGradient>
@@ -407,6 +414,7 @@ class Dashboard extends Component {
   }
 }
 
+<<<<<<< HEAD
 const mapState = state => {
   return {
     card: state.creditCard,
@@ -421,6 +429,19 @@ const mapDispatch = dispatch => {
     storeCharity: (charity) => dispatch(storeCharityThunk((charity)))
   };
 };
+=======
+const mapState = (state) => {
+	return {
+		card: state.creditCard
+	}
+}
+
+const mapDispatch = (dispatch) => {
+	return {
+		getCard: () => dispatch(getCardThunk())
+	}
+}
+>>>>>>> c7325ef414251b257a368f0b01b3ca66b9dd03db
 
 export default connect(mapState, mapDispatch)(Dashboard);
 
