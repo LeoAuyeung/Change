@@ -63,10 +63,10 @@ export default class Donate extends Component {
         <KeyboardAvoidingView style={styles.login} behavior="padding">
           <Block padding={[50, theme.sizes.base * 2]}>
             <View>
-              <Text h1 bold>
+              <Text size={40} bold>
                 Donate directly
               </Text>
-              <Text h3 style={styles.charityName}>
+              <Text size={20} style={styles.charityName}>
                 {charity.charityName}
               </Text>
             </View>
@@ -76,7 +76,7 @@ export default class Donate extends Component {
               resizeMode="contain"
             />
             <Block>
-              <Text h3>Amount (USD)</Text>
+              <Text size={20}>Amount (USD)</Text>
               <NumericInput
                 type="currency"
                 decimalPlaces={2}
@@ -86,7 +86,7 @@ export default class Donate extends Component {
                 onUpdate={value => this.setState({ value: value })}
                 style={styles.label}
               />
-              <Text caption styles={styles.minimumDonation} on>
+              <Text size={20} styles={styles.minimumDonation} on>
                 There is a minimum donation of $1.
               </Text>
               <Button
@@ -128,8 +128,9 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 1,
     padding: 7,
-    marginVertical: 10,
-    maxWidth: "30%"
+    marginVertical: 15,
+    maxWidth: "50%",
+    fontSize: 40
   },
   minimumDonation: {
     marginBottom: 25
