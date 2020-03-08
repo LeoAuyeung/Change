@@ -64,7 +64,7 @@ const MainStack = createStackNavigator(
 );
 
 MainStack.navigationOptions = ({ navigation }) => {
-  let routesToNotShowNavTabs = ["Welcome", "SignUp", "Login", "Forgot"];
+  let routesToNotShowNavTabs = ["Welcome", "SignUp", "Login", "Forgot", "Success"];
 
   let tabBarVisible;
 

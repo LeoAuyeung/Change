@@ -4,33 +4,37 @@ import {
 	StyleSheet,
 	View
 } from "react-native";
-
-import { Block,Text } from "../components";
+import { Block, Text } from "../components";
 import { theme } from "../constants";
 import LottieView from "lottie-react-native";
 
-export default class DonateSuccess extends Component {
+export default class Success extends Component {
 	state = {
 		errors: [],
 		loading: false,
 		value: "0",
 	};
 
+	static navigationOptions = {
+		header: null,
+		headerLeft: null
+	};
+
 	componentDidMount() {
 		this.animation.play();
-		setTimeout(() => {
-			this.props.navigation.goBack(null);
-		}, 2000);
+		// setTimeout(() => {
+		// 	this.props.navigation.goBack(null);
+		// }, 2000);
 	}
 
 	render() {
 		return (
 			<KeyboardAvoidingView style={styles.login} behavior="padding">
 				<Block padding={[0, theme.sizes.base * 2], 50}>
+					<View style={styles.animationContainer}>
 					<Text h1 bold center>
 						Card Added!
           </Text>
-					<View style={styles.animationContainer}>
 						<LottieView
 							ref={animation => {
 								this.animation = animation;
@@ -53,7 +57,7 @@ export default class DonateSuccess extends Component {
 const styles = StyleSheet.create({
 	login: {
 		flex: 1,
-		justifyContent: "center"
+		justifyContent: "center",
 	},
 	input: {
 		borderRadius: 0,
@@ -66,7 +70,8 @@ const styles = StyleSheet.create({
 	},
 	animationContainer: {
 		width: '100%',
-		height: '50%',
+		height: '100%',
 		alignItems: 'center',
+		justifyContent: "center"
 	}
 });
