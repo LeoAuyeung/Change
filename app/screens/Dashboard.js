@@ -33,6 +33,7 @@ class Dashboard extends Component {
     showTransaction: false,
     showDonationOverview: false,
     charities: [],
+    creditCard: "4213 2131 2323 2321",
   };
 
   static navigationOptions = {
@@ -42,7 +43,7 @@ class Dashboard extends Component {
   async componentDidMount() {
     this.setState({ showModal: true });
     await this.props.getCard()
-    console.log(this.props.card)
+    console.log(this.props.card.substring(15,19))
   }
 
   showModal = () => {
@@ -56,6 +57,12 @@ class Dashboard extends Component {
       showCC: false,
     });
   };
+
+  newCreditCard = (number) =>{
+    this.setState({
+      creditCard: number
+    })
+  }
 
   renderDollarCard(navigation) {
     return (
@@ -134,7 +141,7 @@ class Dashboard extends Component {
         visible={this.state.showCC}
         onRequestClose={() => this.setState({ showModal: false })}
       >
-        <CreditCard navigation={navigation} hide={this.hideModal} />
+        <CreditCard navigation={navigation} hide={this.hideModal} newCard={this.newCreditCard}/>
       </Modal>
     );
   }
@@ -246,7 +253,7 @@ class Dashboard extends Component {
                 Active Credit Card, ending in
               </Text>
               <Text size={20} spacing={0.4} bold white>
-                8864
+                {this.props.card.length > 0 ? this.props.card.substring(15,19) : this.state.creditCard.substring(15,19)}
               </Text>
             </Block>
           </LinearGradient>

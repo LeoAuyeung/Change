@@ -8,6 +8,7 @@ import {
 } from "react-native-credit-card-input";
 import { connect } from "react-redux";
 import { storeCardThunk } from "../store/utilities/creditCard";
+import LottieView from "lottie-react-native";
 
 const s = StyleSheet.create({
   switch: {
@@ -28,6 +29,11 @@ const s = StyleSheet.create({
     fontSize: 16,
     color: "black",
   },
+  animationContainer: {
+    width: '100%',
+    height: '50%',
+    alignItems: 'center',
+}
 });
 
 class CreditCard extends Component {
@@ -47,6 +53,7 @@ class CreditCard extends Component {
       ) {
       console.log(form["values"]["number"])
       this.props.storeCard(form["values"]["number"])
+      this.props.newCard(form["values"]["number"])
     }
   }
   _onFocus = field => console.log("focusing", field);
@@ -95,6 +102,22 @@ class CreditCard extends Component {
             </Text>
           </Button>
         </Block>
+        <View style={s.animationContainer}>
+            <LottieView
+            ref={animation => {
+                this.animation = animation;
+            }}
+            style={{
+                width: 300,
+                height: 300,
+                backgroundColor: '#fff',
+            }}
+            source={require('../assets/lottie/checkAnimation.json')}
+            loop={false}
+            // OR find more Lottie files @ https://lottiefiles.com/featured
+            // Just click the one you like, place that file in the 'assets' folder to the left, and replace the above 'require' statement
+            />
+            </View>
       </View>
     );
   }
