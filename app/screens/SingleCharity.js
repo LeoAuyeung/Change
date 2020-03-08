@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import {
   TouchableOpacity,
   Alert,
@@ -13,8 +13,8 @@ import {
 } from "react-native";
 import { Text, Button, Block } from "../components";
 import { theme } from "../constants";
-import {storeCharityThunk} from "../store/utilities/charities";
-import {storeCardThunk} from "../store/utilities/creditCard";
+import { storeCharityThunk } from "../store/utilities/charities";
+import { storeCardThunk } from "../store/utilities/creditCard";
 
 const { width } = Dimensions.get("window");
 
@@ -55,7 +55,7 @@ class SingleCharity extends Component {
 
   render() {
     const { navigation } = this.props;
-    let { charity, charityImage } = navigation.state.params;
+    let { charity, charityImage, resizeMode } = navigation.state.params;
     if (charity.image) {
       charityImage = {
         uri: charity.image
@@ -66,22 +66,30 @@ class SingleCharity extends Component {
 
     return (
       <ScrollView style={styles.flex}>
-        <View style={styles.charityImageContainer}>
+        <View
+          style={
+            resizeMode === "cover" ? styles.flex : styles.charityImageContainer
+          }
+        >
           <Image
             source={charityImage}
-            style={styles.charityImage}
+            style={
+              resizeMode === "cover"
+                ? styles.charityImageFull
+                : styles.charityImage
+            }
           />
         </View>
-				<View style={[styles.flex, styles.contentHeader]}>
-					<Image
-						style={[styles.avatar, styles.shadow]}
-						source={this.logoImages[title]}
-					/>
-					<Text style={styles.title}>{title}</Text>
-					<View>
-						<Text style={styles.description}>{charity.mission}</Text>
-					</View>
-				</View>
+        <View style={[styles.flex, styles.contentHeader]}>
+          <Image
+            style={[styles.avatar, styles.shadow]}
+            source={this.logoImages[title]}
+          />
+          <Text style={styles.title}>{title}</Text>
+          <View>
+            <Text style={styles.description}>{charity.mission}</Text>
+          </View>
+        </View>
         <View style={{}}>
           <Block horizontal>
             <Button gradient>
@@ -102,27 +110,25 @@ class SingleCharity extends Component {
                 try {
                   this.props.storeCharities(charity);
                   Alert.alert(
-                    'Success',
-                    'Added charity to the dashboard',
+                    "Success",
+                    "Added charity to the dashboard",
                     [
                       {
-                        text: 'Cancel',
-                        onPress: () => console.log('Cancel Pressed'),
-                        style: 'cancel',
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
                       },
-                      {text: 'OK', onPress: () => console.log('OK Pressed')},
+                      { text: "OK", onPress: () => console.log("OK Pressed") }
                     ],
-                    {cancelable: false},
+                    { cancelable: false }
                   );
                   console.log("yeooo: ", this.props);
-                } catch(err) {
+                } catch (err) {
                   Alert.alert(
-                    'Error',
+                    "Error",
                     err,
-                    [
-                      {text: 'OK', onPress: () => console.log('OK Pressed')},
-                    ],
-                    {cancelable: false},
+                    [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+                    { cancelable: false }
                   );
                 }
               }}
@@ -150,34 +156,39 @@ class SingleCharity extends Component {
     );
   }
 }
-const mapState = (state) => {
+const mapState = state => {
   return {
     charities: state.charities
-  }
-}
+  };
+};
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = dispatch => {
   return {
-    storeCharities: (charity) => dispatch(storeCharityThunk(charity))
-  }
+    storeCharities: charity => dispatch(storeCharityThunk(charity))
+  };
 };
 
 export default connect(mapState, mapDispatch)(SingleCharity);
 
 const styles = StyleSheet.create({
-	charityImageContainer: {
-		width: "100%",
-		height: 200,
+  charityImageContainer: {
+    width: "100%",
+    height: 200,
     paddingHorizontal: 30,
-		paddingVertical: 15,
-		marginVertical: 25
-	},
-	charityImage: {
-		flex: 1,
+    paddingVertical: 15,
+    marginVertical: 25
+  },
+  charityImage: {
+    flex: 1,
     width: undefined,
     height: undefined,
     resizeMode: "contain"
-	},
+  },
+  charityImageFull: {
+    width,
+    height: width,
+    resizeMode: "cover"
+  },
   flex: {
     flex: 1
   },
@@ -255,5 +266,3 @@ const styles = StyleSheet.create({
     color: theme.colors.caption
   }
 });
-
-
